@@ -11,7 +11,7 @@ export const LoginPage: FC = () => {
   };
 
   return (
-    <Flex vertical gap="middle" style={{ width: '20%' }}>
+    <Flex vertical gap="middle">
       <Card style={{ width: '100%' }}>
         <Flex vertical gap="middle">
           <Title style={{ textAlign: 'center' }} level={2}>
