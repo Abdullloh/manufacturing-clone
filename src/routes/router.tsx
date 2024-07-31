@@ -1,6 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { LayoutAuthorized, LayoutBase } from '../layouts';
-import { ProductsPage } from '../pages/LoginPage';
+import { CategoryPage } from '../pages/categoryPage';
+import { SubCategoryPage } from '../pages/subCategoryPage';
+import { DimensionsPage } from '../pages/dimensionsPage';
+import { ProductsPage } from '../pages/productsPage';
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +16,26 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        caseSensitive: true,
+        element: <CategoryPage />,
+      },
+      {
+        path: '/cabinet/category',
+        caseSensitive: true,
+        element: <CategoryPage />,
+      },
+      {
+        path: '/cabinet/subcategory',
+        caseSensitive: true,
+        element: <SubCategoryPage />,
+      },
+      {
+        path: '/cabinet//dimensions',
+        caseSensitive: true,
+        element: <DimensionsPage />,
+      },
+      {
+        path: '/cabinet/products',
         caseSensitive: true,
         element: <ProductsPage />,
       },
