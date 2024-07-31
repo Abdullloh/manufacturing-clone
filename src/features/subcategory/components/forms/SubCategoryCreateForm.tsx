@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Select } from 'antd';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormComponent } from '../../../../components/form';
@@ -8,17 +8,18 @@ type FieldType = {
   category_name?: string;
 };
 
-interface ICategoryCreateForm {
+interface ISubCategoryCreateForm {
   onSubmit: (values: any) => void;
 }
 
-export const CategoryCreateForm: FC<ICategoryCreateForm> = ({ onSubmit }) => {
+export const SubCategoryCreateForm: FC<ISubCategoryCreateForm> = ({ onSubmit }) => {
   const { control, handleSubmit } = useForm({
     defaultValues: {},
   });
 
   return (
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">
+      <Select />
       <InputController control={control} name="category_name" label="Kategoriya nomi" />
       <Button type="primary" htmlType="submit">
         Submit
