@@ -12,6 +12,10 @@ const sidebarLink = [
     path: '/cabinet/subcategory',
   },
   {
+    label: "O'lchov birligi",
+    path: '/cabinet/dimensions',
+  },
+  {
     label: 'Mahsulotlar',
     path: '/cabinet/products',
   },
