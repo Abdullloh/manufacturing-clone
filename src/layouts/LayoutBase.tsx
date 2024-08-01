@@ -1,6 +1,6 @@
 import { Flex } from 'antd';
 import { FC } from 'react';
-import { LoginPage } from '../pages/loginPage';
+import { LoginPage } from '../pages/LoginPage/LoginPage';
 
 export const LayoutBase: FC = () => {
   return (
