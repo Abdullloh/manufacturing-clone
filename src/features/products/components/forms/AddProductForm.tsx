@@ -15,23 +15,32 @@ export const AddProductForm: FC<IAddProductForm> = ({ onSubmit }) => {
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">
       <SelectController
         control={control}
-        label="smth"
-        name=""
-        options={[{ label: 'asd', value: 'ads' }]}
+        label="Kategoriya nomi"
+        name="category_name"
+        options={[
+          { label: 'Zamok', value: '1' },
+          { label: 'Tugma', value: '2' },
+        ]}
       />
       <SelectController
         control={control}
-        label="smth"
-        name=""
-        options={[{ label: 'asd', value: 'ads' }]}
+        label="Sub kategoriya"
+        name="sub_category"
+        options={[
+          { label: 'Kok', value: '1' },
+          { label: 'Sariq', value: '2' },
+        ]}
       />
       <SelectController
         control={control}
-        label="smth"
-        name=""
-        options={[{ label: 'asd', value: 'ads' }]}
+        label="O'lchov birliklari"
+        name="dimensions"
+        options={[
+          { label: 'Dona', value: '1' },
+          { label: 'Kg', value: '2' },
+        ]}
       />
-      <InputController control={control} name="category_name" label="Kategoriya nomi" />
+      <InputController control={control} name="valume" label="Hajmi" />
       <Button type="primary" htmlType="submit">
         Submit
       </Button>

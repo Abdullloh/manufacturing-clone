@@ -9,10 +9,14 @@ interface ISelectController {
   options: { label: string; value: string }[];
 }
 
-export const SelectController: FC<ISelectController> = ({ name, control, label }) => {
+export const SelectController: FC<ISelectController> = ({ name, control, label, options }) => {
   return (
     <Form.Item name={name} label={label}>
-      <Controller name={name} control={control} render={({ field }) => <Select {...field} />} />
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => <Select options={options} {...field} />}
+      />
     </Form.Item>
   );
 };
