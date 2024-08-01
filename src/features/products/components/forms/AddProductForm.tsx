@@ -3,12 +3,10 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormComponent } from '../../../../components/form';
 import { InputController, SelectController } from '../../../../components/input';
-
-interface ISubCategoryCreateForm {
+interface IAddProductForm {
   onSubmit: (values: any) => void;
 }
-
-export const SubCategoryCreateForm: FC<ISubCategoryCreateForm> = ({ onSubmit }) => {
+export const AddProductForm: FC<IAddProductForm> = ({ onSubmit }) => {
   const { control, handleSubmit } = useForm({
     defaultValues: {},
   });
@@ -17,11 +15,23 @@ export const SubCategoryCreateForm: FC<ISubCategoryCreateForm> = ({ onSubmit }) 
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">
       <SelectController
         control={control}
-        label="Kategoriya"
+        label="smth"
         name=""
         options={[{ label: 'asd', value: 'ads' }]}
       />
-      <InputController control={control} name="category_name" label="Subkategoriya nomi" />
+      <SelectController
+        control={control}
+        label="smth"
+        name=""
+        options={[{ label: 'asd', value: 'ads' }]}
+      />
+      <SelectController
+        control={control}
+        label="smth"
+        name=""
+        options={[{ label: 'asd', value: 'ads' }]}
+      />
+      <InputController control={control} name="category_name" label="Kategoriya nomi" />
       <Button type="primary" htmlType="submit">
         Submit
       </Button>

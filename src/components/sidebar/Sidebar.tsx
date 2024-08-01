@@ -1,19 +1,18 @@
 import { Flex } from 'antd';
-import Typography from 'antd/es/typography/Typography';
 import { FC } from 'react';
 import { SidebarLink } from './SidebarLink';
 
 const sidebarLink = [
   {
-    label: 'Category',
+    label: 'Kategoriyalar',
     path: '/cabinet/category',
   },
   {
-    label: 'SubCategory',
+    label: 'Subkategoriyalar',
     path: '/cabinet/subcategory',
   },
   {
-    label: 'Products',
+    label: 'Mahsulotlar',
     path: '/cabinet/products',
   },
 ];
@@ -21,8 +20,8 @@ const sidebarLink = [
 export const Sidebar: FC = () => {
   return (
     <Flex vertical flex={1} style={{ background: 'rgb(15 23 42)' }}>
-      <Typography style={{ height: 50, textAlign: 'center', color: '#fff' }}>Logo</Typography>
-      {sidebarLink.map((item,idx) => (
+      {/* <Typography style={{ height: 50, textAlign: 'center', color: '#fff' }}>Logo</Typography> */}
+      {sidebarLink.map((item, idx) => (
         <SidebarLink key={idx} {...item} />
       ))}
     </Flex>
