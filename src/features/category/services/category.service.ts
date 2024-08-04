@@ -12,7 +12,12 @@ export const categoryApi = createApi({
         body: { category_name },
       }),
     }),
+    getCategoryList: builder.query<{ id: string; name: string; is_deleted: boolean }[], any>({
+      query: () => ({
+        url: '/category/list',
+      }),
+    }),
   }),
 });
 
-export const { useCreateCategoryMutation } = categoryApi;
+export const { useCreateCategoryMutation, useGetCategoryListQuery } = categoryApi;

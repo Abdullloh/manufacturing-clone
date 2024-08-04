@@ -1,17 +1,23 @@
 import { Button, Flex, Table, Typography } from 'antd';
 import { FC } from 'react';
+import { SUB_CATEGORY_COLUMNS } from '../../features/subcategory/columns';
 import { SubCategoryAddModal } from '../../features/subcategory/components/modals';
-import { useCreateSubCategoryMutation } from '../../features/subcategory/services';
+import {
+  useCreateSubCategoryMutation,
+  useGetSubCategoryListQuery,
+} from '../../features/subcategory/services';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
 
 export const SubCategoryPage: FC = () => {
   const [addSubCategory] = useCreateSubCategoryMutation();
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
+  const { data, refetch, isLoading } = useGetSubCategoryListQuery();
 
   const handleCreateCategory = (values: any) => {
     console.log(values);
-    // addSubCategory(values);
+    addSubCategory({ sub_category_name: values.sub_category_name }).then(refetch);
+    handleCloseModal();
   };
 
   return (
@@ -23,10 +29,7 @@ export const SubCategoryPage: FC = () => {
         </Button>
       </Flex>
 
-      <Table
-        dataSource={[{ name: 'Abdulloh' }, { name: 'Abdulloh' }]}
-        columns={[{ key: 'name', title: 'Ismi' }]}
-      />
+      <Table loading={isLoading} dataSource={data} columns={SUB_CATEGORY_COLUMNS} />
 
       <SubCategoryAddModal
         open={isModalOpen}

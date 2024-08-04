@@ -5,14 +5,17 @@ export const subCategoryApi = createApi({
   reducerPath: 'subCategoryApi',
   baseQuery: baseApi,
   endpoints: (builder) => ({
-    createSubCategory: builder.mutation<any, { category_name: string }>({
-      query: ({ category_name }) => ({
+    createSubCategory: builder.mutation<any, { sub_category_name: string }>({
+      query: ({ sub_category_name }) => ({
         url: '/sub-category/create',
         method: 'POST',
-        body: { category_name },
+        body: { sub_category_name },
       }),
+    }),
+    getSubCategoryList: builder.query<{ id: string; name: string; is_deleted: boolean }[], void>({
+      query: () => '/sub-category/list',
     }),
   }),
 });
 
-export const { useCreateSubCategoryMutation } = subCategoryApi;
+export const { useCreateSubCategoryMutation, useGetSubCategoryListQuery } = subCategoryApi;

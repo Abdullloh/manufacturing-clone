@@ -26,7 +26,7 @@ export const ProductsPage: FC = () => {
 
       <Table
         dataSource={[{ name: 'Abdulloh' }, { name: 'Abdulloh' }]}
-        columns={[{ key: 'name', title: 'Ismi' }]}
+        columns={[{ key: 'name', title: 'Nomi' }]}
       />
       {data && <QRCodeGenerator value={data} />}
 

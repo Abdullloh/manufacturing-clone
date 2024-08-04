@@ -4,10 +4,6 @@ import { useForm } from 'react-hook-form';
 import { FormComponent } from '../../../../components/form';
 import { InputController } from '../../../../components/input';
 
-type FieldType = {
-  category_name?: string;
-};
-
 interface ICategoryCreateForm {
   onSubmit: (values: any) => void;
 }

@@ -1,5 +1,5 @@
+import { Button, Card, Flex, Form, Input, Typography } from 'antd';
 import { FC } from 'react';
-import { Button, Card, Flex, Input, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 const { Title } = Typography;
 
@@ -17,11 +17,13 @@ export const LoginPage: FC = () => {
           <Title style={{ textAlign: 'center' }} level={2}>
             Tizimga kirish
           </Title>
-          <Input placeholder="Login" />
-          <Input placeholder="Parol" />
-          <Button onClick={handleLogin} type="primary">
-            Kirish
-          </Button>
+          <Form style={{ display: 'flex', gap: 8, flexDirection: 'column', width: '100%' }}>
+            <Input placeholder="Login" />
+            <Input placeholder="Parol" />
+            <Button onClick={handleLogin} type="primary" htmlType="submit">
+              Kirish
+            </Button>
+          </Form>
         </Flex>
       </Card>
     </Flex>

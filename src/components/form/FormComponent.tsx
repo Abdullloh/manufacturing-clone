@@ -13,13 +13,7 @@ export const FormComponent: FC<IFormComponent> = ({
   ...props
 }) => {
   return (
-    <Form
-      name={name}
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      {...props}
-    >
+    <Form name={name} onFinish={onFinish} onFinishFailed={onFinishFailed} {...props}>
       {children}
     </Form>
   );

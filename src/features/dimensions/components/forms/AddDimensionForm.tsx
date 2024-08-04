@@ -2,7 +2,11 @@ import { Button } from 'antd';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormComponent } from '../../../../components/form';
-import { InputController, SelectController } from '../../../../components/input';
+import { InputController } from '../../../../components/input';
+import {
+  CategorySelectController,
+  SubCategorySelectController,
+} from '../../../../shared/components/selects';
 
 interface IAddDimensionsForm {
   onSubmit: (values: any) => void;
@@ -14,19 +18,9 @@ export const AddDimensionForm: FC<IAddDimensionsForm> = ({ onSubmit }) => {
   });
   return (
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">
-      <SelectController
-        control={control}
-        label="Kategoriya"
-        name="category_id"
-        options={[{ label: 'Tugma', value: '1' }]}
-      />
-      <SelectController
-        control={control}
-        label="SubCategory"
-        name="subcategory_id"
-        options={[{ label: 'Kok', value: '1' }]}
-      />
-      <InputController control={control} name="category_name" label="O'lchov birligi nomi" />
+      <CategorySelectController control={control} name="category_id" />
+      <SubCategorySelectController control={control} name="subcategory_id" />
+      <InputController control={control} name="valume_type_name" label="O'lchov birligi nomi" />
       <Button type="primary" htmlType="submit">
         Submit
       </Button>

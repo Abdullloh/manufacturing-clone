@@ -1,29 +1,35 @@
 import { Button, Flex, Table, Typography } from 'antd';
 import { FC } from 'react';
+import { DIMENSIONS_COLUMNS } from '../../features/dimensions/columns';
 import { AddDimensionModal } from '../../features/dimensions/components/modals';
+import {
+  useCreateDimensionMutation,
+  useGetValumeTypeListQuery,
+} from '../../features/dimensions/services';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
 
 export const DimensionsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
+  const [addDimension] = useCreateDimensionMutation();
+  const { data, isLoading, refetch } = useGetValumeTypeListQuery();
 
   const handleCreateCategory = (values: any) => {
-    console.log(values);
-    // a
+    addDimension({ valume_type_name: values.valume_type_name })
+      .then(handleCloseModal)
+      .then(refetch);
   };
+
   return (
     <Flex vertical style={{ width: '100%' }}>
       <Flex justify="space-between">
-        <Title level={2}>Sub kategoriyalar ruyhati </Title>
+        <Title level={2}>O'lchov birliklari ruyhati</Title>
         <Button type="primary" onClick={handleOpenModal}>
           Qo'shish
         </Button>
       </Flex>
 
-      <Table
-        dataSource={[{ name: 'Abdulloh' }, { name: 'Abdulloh' }]}
-        columns={[{ key: 'name', title: 'Ismi' }]}
-      />
+      <Table loading={isLoading} dataSource={data} columns={DIMENSIONS_COLUMNS} />
 
       <AddDimensionModal
         open={isModalOpen}
