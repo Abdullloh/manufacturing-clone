@@ -3,6 +3,7 @@ import { LayoutAuthorized, LayoutBase } from '../layouts';
 import { CategoryPage } from '../pages/categoryPage';
 import { DimensionsPage } from '../pages/dimensionsPage';
 import { ModelsPage } from '../pages/modelsPage';
+import { ProductDeletePage } from '../pages/productDeletePage';
 import { ProductsPage } from '../pages/productsPage';
 import { SubCategoryPage } from '../pages/subCategoryPage';
 
@@ -44,6 +45,11 @@ export const router = createBrowserRouter([
         path: '/cabinet/model-types',
         caseSensitive: true,
         element: <ModelsPage />,
+      },
+      {
+        path: '/cabinet/product-delete/:id',
+        caseSensitive: true,
+        element: <ProductDeletePage />,
       },
     ],
   },

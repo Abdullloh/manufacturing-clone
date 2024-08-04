@@ -15,8 +15,7 @@ export const SubCategoryPage: FC = () => {
   const { data, refetch, isLoading } = useGetSubCategoryListQuery();
 
   const handleCreateCategory = (values: any) => {
-    console.log(values);
-    addSubCategory({ sub_category_name: values.sub_category_name }).then(refetch);
+    addSubCategory(values).then(refetch);
     handleCloseModal();
   };
 

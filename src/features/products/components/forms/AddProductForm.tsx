@@ -1,46 +1,46 @@
-import { Button } from 'antd';
+import { Button, Flex } from 'antd';
 import { FC } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormComponent } from '../../../../components/form';
 import { InputController, SelectController } from '../../../../components/input';
+import {
+  CategorySelectController,
+  SelectModelTypeController,
+  SelectValumeController,
+  SubCategorySelectController,
+} from '../../../../shared/components/selects';
 interface IAddProductForm {
   onSubmit: (values: any) => void;
 }
 export const AddProductForm: FC<IAddProductForm> = ({ onSubmit }) => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<any>({
     defaultValues: {},
   });
 
+  const categoryId = useWatch({ control, name: 'category_id' });
+
   return (
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">
-      <SelectController
-        control={control}
-        label="Kategoriya nomi"
-        name="category_name"
-        options={[
-          { label: 'Zamok', value: '1' },
-          { label: 'Tugma', value: '2' },
-        ]}
-      />
-      <SelectController
-        control={control}
-        label="Sub kategoriya"
-        name="sub_category"
-        options={[
-          { label: 'Kok', value: '1' },
-          { label: 'Sariq', value: '2' },
-        ]}
-      />
-      <SelectController
-        control={control}
-        label="O'lchov birliklari"
-        name="dimensions"
-        options={[
-          { label: 'Dona', value: '1' },
-          { label: 'Kg', value: '2' },
-        ]}
-      />
-      <InputController control={control} name="valume" label="Hajmi" />
+      <InputController control={control} name="product_name" label="Mahsulot nomi" />
+      <CategorySelectController control={control} name="category_id" />
+      <SubCategorySelectController control={control} name="sub_category_id" id={categoryId} />
+      <SelectValumeController control={control} name="valume_type_id" />
+      <InputController control={control} name="value" label="Miqdori" />
+      <InputController control={control} name="color" label="Rangi" />
+      <InputController control={control} name="code" label="Kodi" />
+      <Flex gap={5}>
+        <InputController style={{ flex: '1' }} control={control} name="price" label="Narxi" />
+        <SelectController
+          control={control}
+          name="currency_type"
+          label="Valyuta"
+          options={[
+            { label: "S'om", value: '0' },
+            { label: 'Dollar', value: '1' },
+          ]}
+        />
+      </Flex>
+      <SelectModelTypeController control={control} name="model_id" />
       <Button type="primary" htmlType="submit">
         Submit
       </Button>

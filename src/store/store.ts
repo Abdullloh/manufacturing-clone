@@ -3,6 +3,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { categoryApi } from '../features/category/services/category.service';
 import { dimensionsApi } from '../features/dimensions/services';
 import { modelApi } from '../features/modelTypes/services';
+import { productService } from '../features/products/services';
 import { subCategoryApi } from '../features/subcategory/services';
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     [subCategoryApi.reducerPath]: subCategoryApi.reducer,
     [dimensionsApi.reducerPath]: dimensionsApi.reducer,
     [modelApi.reducerPath]: modelApi.reducer,
+    [productService.reducerPath]: productService.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -18,6 +20,7 @@ export const store = configureStore({
       subCategoryApi.middleware,
       dimensionsApi.middleware,
       modelApi.middleware,
+      productService.middleware,
     ),
 });
 

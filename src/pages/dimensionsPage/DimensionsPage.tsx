@@ -15,9 +15,7 @@ export const DimensionsPage: FC = () => {
   const { data, isLoading, refetch } = useGetValumeTypeListQuery();
 
   const handleCreateCategory = (values: any) => {
-    addDimension({ valume_type_name: values.valume_type_name })
-      .then(handleCloseModal)
-      .then(refetch);
+    addDimension(values).then(handleCloseModal).then(refetch);
   };
 
   return (

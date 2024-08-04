@@ -15,7 +15,9 @@ export const SelectController: FC<ISelectController> = ({ name, control, label, 
       <Controller
         name={name}
         control={control}
-        render={({ field }) => <Select options={options} {...field} />}
+        render={({ field }) => (
+          <Select options={options} showSearch optionFilterProp="label" {...field} />
+        )}
       />
     </Form.Item>
   );

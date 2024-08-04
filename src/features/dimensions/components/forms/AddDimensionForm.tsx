@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import { FC } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormComponent } from '../../../../components/form';
 import { InputController } from '../../../../components/input';
 import {
@@ -13,13 +13,17 @@ interface IAddDimensionsForm {
 }
 
 export const AddDimensionForm: FC<IAddDimensionsForm> = ({ onSubmit }) => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<any>({
     defaultValues: {},
   });
+
+  const categoryId = useWatch({ control, name: 'category_id' });
+  console.log(categoryId);
+
   return (
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">
       <CategorySelectController control={control} name="category_id" />
-      <SubCategorySelectController control={control} name="subcategory_id" />
+      <SubCategorySelectController control={control} name="subcategory_id" id={categoryId} />
       <InputController control={control} name="valume_type_name" label="O'lchov birligi nomi" />
       <Button type="primary" htmlType="submit">
         Submit

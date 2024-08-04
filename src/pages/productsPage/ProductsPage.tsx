@@ -1,20 +1,32 @@
 import { Button, Flex, Table, Typography } from 'antd';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { QRCodeGenerator } from '../../components';
-import { AddProductModal } from '../../features/products/components/modals/AddProductModal';
+import { AddProductModal } from '../../features/products/components/modals';
+import { IProduct } from '../../features/products/models';
+import { useCreateProductMutation, useGetProductsMutation } from '../../features/products/services';
 import { useModal } from '../../shared/hooks/useModal';
 
 const { Title } = Typography;
 
 export const ProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
-  const [isQrcCodeVisible, setIsQrCideVisible] = useState(false);
-  const [data, setData] = useState<any>();
+  const [addProduct] = useCreateProductMutation();
+  const [fetchProducts] = useGetProductsMutation();
 
-  const handleAddProduct = (values: any) => {
-    setData(values);
+  const [id, setId] = useState<string>('');
+
+  const handleAddProduct = (values: IProduct) => {
+    addProduct(values).then(({ data }) => setId(data.id));
+
+    // .then(handleCloseModal)
+    // .then(() => handleCreateQrCode(data));
+
+    // console.log(data);
   };
 
+  useEffect(() => {
+    fetchProducts({});
+  }, []);
   return (
     <Flex vertical style={{ width: '100%' }}>
       <Flex justify="space-between">
@@ -28,11 +40,18 @@ export const ProductsPage: FC = () => {
         dataSource={[{ name: 'Abdulloh' }, { name: 'Abdulloh' }]}
         columns={[{ key: 'name', title: 'Nomi' }]}
       />
-      {data && <QRCodeGenerator value={data} />}
-
+      {id && (
+        <Flex
+          style={{ zIndex: 9999, width: '100vh', height: '100vw', background: '#969292' }}
+          align="center"
+          justify="center"
+        >
+          <QRCodeGenerator value={`${window.location.host}/cabinet/product-delete/${id}`} />
+        </Flex>
+      )}
       <AddProductModal
         open={isModalOpen}
-        title="Subkategoriya qo'shish"
+        title="Mahsulot qo'shish"
         onSubmit={handleAddProduct}
         onOk={() => {}}
         onCancel={handleCloseModal}
