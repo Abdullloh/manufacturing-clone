@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import { LayoutAuthorized, LayoutBase } from '../layouts';
 import { CategoryPage } from '../pages/categoryPage';
 import { DimensionsPage } from '../pages/dimensionsPage';
+import { ExitedProductsPage } from '../pages/exitedProductsPage';
+import { IncomingProductsPage } from '../pages/incomingProductsPage';
 import { ModelsPage } from '../pages/modelsPage';
 import { ProductDeletePage } from '../pages/productDeletePage';
 import { ProductsPage } from '../pages/productsPage';
@@ -40,6 +42,16 @@ export const router = createBrowserRouter([
         path: '/cabinet/products',
         caseSensitive: true,
         element: <ProductsPage />,
+      },
+      {
+        path: '/cabinet/products/exited',
+        caseSensitive: true,
+        element: <ExitedProductsPage />,
+      },
+      {
+        path: '/cabinet/products/coming',
+        caseSensitive: true,
+        element: <IncomingProductsPage />,
       },
       {
         path: '/cabinet/model-types',

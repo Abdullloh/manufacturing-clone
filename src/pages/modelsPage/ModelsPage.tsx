@@ -1,4 +1,4 @@
-import { Button, Flex, Typography } from 'antd';
+import { Button, DatePicker, Flex, Input, Typography } from 'antd';
 import { FC } from 'react';
 import { MODEL_TYPES_COLUMNS } from '../../features/modelTypes/columns';
 import { AddModalTypeModal } from '../../features/modelTypes/components/modals';
@@ -11,6 +11,7 @@ import {
 import { ReusableTable } from '../../shared/components/table';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
+const { RangePicker } = DatePicker;
 
 export const ModelsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
@@ -35,6 +36,10 @@ export const ModelsPage: FC = () => {
         </Button>
       </Flex>
 
+      <Flex justify="flex-end" style={{ marginBottom: 10 }} gap={5}>
+        <Input placeholder="Qidiruv" />
+        <RangePicker />
+      </Flex>
       <ReusableTable<IModelType>
         onEdit={() => {}}
         onDelete={handleDeleteModelType}

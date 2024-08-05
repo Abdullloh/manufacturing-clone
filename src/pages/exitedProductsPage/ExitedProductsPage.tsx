@@ -9,7 +9,7 @@ import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
 
-export const ProductsPage: FC = () => {
+export const ExitedProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal } = useModal();
   const [addProduct] = useCreateProductMutation();
   const { data, isLoading } = useGetProductsQuery({ is_deleted: false });
@@ -35,12 +35,10 @@ export const ProductsPage: FC = () => {
       <Flex justify="space-between">
         <Title level={2}>MAXSULOTLAR RO'YXATI </Title>
       </Flex>
-
       <Flex justify="flex-end" style={{ marginBottom: 10 }} gap={5}>
         <Input placeholder="Qidiruv" />
         <RangePicker />
       </Flex>
-
       <Table loading={isLoading} dataSource={data} columns={PRODUCT_COLUMNS} />
 
       <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />

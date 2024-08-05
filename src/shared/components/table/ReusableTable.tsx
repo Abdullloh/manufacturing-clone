@@ -30,5 +30,5 @@ export const ReusableTable = <T extends {}>({
     },
   ];
 
-  return <Table columns={extendedColumns} {...props} />;
+  return <Table columns={extendedColumns} {...props} bordered />;
 };

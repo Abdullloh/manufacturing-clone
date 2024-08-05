@@ -17,6 +17,7 @@ export const PRODUCT_COLUMNS: TableProps<IProduct>['columns'] = [
     key: 'sub_category_name',
     dataIndex: 'sub_category_name',
   },
+
   {
     title: 'Rangi',
     key: 'color',
@@ -33,8 +34,29 @@ export const PRODUCT_COLUMNS: TableProps<IProduct>['columns'] = [
     dataIndex: 'price',
   },
   {
+    title: 'Valyuta turi',
+    key: 'currency_type',
+    dataIndex: 'currency_type',
+    render: (value) => (value === '0' ? 'Sum' : 'Dollar'),
+  },
+  {
     title: 'Soni',
     key: 'value',
     dataIndex: 'value',
+  },
+  {
+    title: 'Model',
+    key: 'model_name',
+    dataIndex: 'model_name',
+  },
+  {
+    title: 'Kirgan vaqti',
+    key: 'created_at',
+    dataIndex: 'created_at',
+  },
+  {
+    title: 'Chiqib ketish vaqti',
+    key: 'exited_date',
+    dataIndex: 'exited_date',
   },
 ];

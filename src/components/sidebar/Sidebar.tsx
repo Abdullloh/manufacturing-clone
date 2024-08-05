@@ -1,8 +1,10 @@
 import {
   BgColorsOutlined,
+  CheckCircleOutlined,
   CopyOutlined,
+  DoubleLeftOutlined,
+  DoubleRightOutlined,
   LineHeightOutlined,
-  ScissorOutlined,
   SnippetsOutlined,
 } from '@ant-design/icons';
 import { Flex } from 'antd';
@@ -33,9 +35,19 @@ const sidebarLink = [
     path: '/cabinet/model-types',
   },
   {
-    icon: <ScissorOutlined />,
-    label: 'MAHSULOTLAR',
+    icon: <DoubleRightOutlined />,
+    label: 'KELGAN MAHSULOTLAR',
+    path: '/cabinet/products/coming',
+  },
+  {
+    icon: <CheckCircleOutlined />,
+    label: 'OMBORDAGI MAHSULOTLAR',
     path: '/cabinet/products',
+  },
+  {
+    icon: <DoubleLeftOutlined />,
+    label: 'CHIQIB KETGAN MAHSULOTLAR',
+    path: '/cabinet/products/exited',
   },
 ];
 
