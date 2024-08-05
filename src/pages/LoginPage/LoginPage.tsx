@@ -28,7 +28,7 @@ export const LoginPage: FC = () => {
         </Title>
         <Form style={{ display: 'flex', gap: 8, flexDirection: 'column', width: '60%' }}>
           <Input placeholder="Login" />
-          <Input placeholder="Parol" />
+          <Input placeholder="Parol" type="password" />
           <Button
             onClick={handleLogin}
             style={{ background: '#184da2e2' }}
