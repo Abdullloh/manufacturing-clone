@@ -3,7 +3,11 @@ import { FC, useState } from 'react';
 import { PRODUCT_COLUMNS } from '../../features/products/columns';
 import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
 import { IProduct } from '../../features/products/models';
-import { useCreateProductMutation, useGetProductsQuery } from '../../features/products/services';
+import {
+  useCreateProductMutation,
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from '../../features/products/services';
 import { ReusableTable } from '../../shared/components/table';
 import { useModal } from '../../shared/hooks/useModal';
 
@@ -12,14 +16,21 @@ const { Title } = Typography;
 export const ProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const [addProduct] = useCreateProductMutation();
+  const [deletProducs] = useDeleteProductMutation();
   const [type, setType] = useState<number>(2);
-  const { data, isLoading } = useGetProductsQuery(type <= 1 ? { is_deleted: Boolean(type) } : {}, {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data, isLoading, refetch } = useGetProductsQuery(
+    type <= 1 ? { is_deleted: Boolean(type) } : {},
+    {
+      refetchOnMountOrArgChange: true,
+    },
+  );
   const [qrCodeOpen, setQrCodeOpen] = useState<boolean>(false);
 
   const [id, setId] = useState<string>('');
 
+  const handleDeleteProduct = (id: string) => {
+    deletProducs({ id }).then(refetch);
+  };
   const handleAddProduct = (values: IProduct) => {
     addProduct(values).then(({ data }) => {
       handleCloseModal();
@@ -58,7 +69,7 @@ export const ProductsPage: FC = () => {
       </Flex>
 
       <ReusableTable
-        onDelete={() => {}}
+        onDelete={handleDeleteProduct}
         onEdit={() => {}}
         loading={isLoading}
         dataSource={data}
