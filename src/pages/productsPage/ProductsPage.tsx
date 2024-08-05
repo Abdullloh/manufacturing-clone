@@ -67,7 +67,6 @@ export const ProductsPage: FC = () => {
       {/* <Table loading={isLoading} dataSource={data} columns={PRODUCT_COLUMNS} /> */}
 
       <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />
-
       <AddProductModal
         open={isModalOpen}
         title="Mahsulot qo'shish"
