@@ -11,9 +11,7 @@ interface ICategorAddModal extends ModalProps {
 
 export const CategoryAddModal: FC<ICategorAddModal> = ({ onSubmit, id, ...props }) => {
   const [getCategory] = useGetCategoryItemMutation();
-
   const [values, setValues] = useState<any>();
-  console.log(values);
 
   useEffect(() => {
     if (id) {

@@ -1,4 +1,4 @@
-import { Button, Flex, Typography } from 'antd';
+import { Button, Flex, Select, Typography } from 'antd';
 import { FC, useState } from 'react';
 import { PRODUCT_COLUMNS } from '../../features/products/columns';
 import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
@@ -12,7 +12,10 @@ const { Title } = Typography;
 export const ProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const [addProduct] = useCreateProductMutation();
-  const { data, isLoading } = useGetProductsQuery();
+  const [type, setType] = useState<number>(2);
+  const { data, isLoading } = useGetProductsQuery(type <= 1 ? { is_deleted: Boolean(type) } : {}, {
+    refetchOnMountOrArgChange: true,
+  });
   const [qrCodeOpen, setQrCodeOpen] = useState<boolean>(false);
 
   const [id, setId] = useState<string>('');
@@ -23,6 +26,10 @@ export const ProductsPage: FC = () => {
       setId(data.id);
       setQrCodeOpen(true);
     });
+  };
+
+  const handleSelectType = (e: any) => {
+    setType(e);
   };
 
   const handlePrintQrCode = () => {
@@ -37,6 +44,17 @@ export const ProductsPage: FC = () => {
         <Button type="primary" onClick={handleOpenModal}>
           Qo'shish
         </Button>
+      </Flex>
+      <Flex style={{ marginBottom: 10 }} justify="flex-end">
+        <Select
+          onChange={handleSelectType}
+          defaultValue={2}
+          options={[
+            { label: 'Barcha mahsulotlar', value: 2 },
+            { label: 'Chiqib ketgan mahsulotlar', value: 1 },
+            { label: 'Kirib kegan mahsulotlar', value: 0 },
+          ]}
+        />
       </Flex>
 
       <ReusableTable

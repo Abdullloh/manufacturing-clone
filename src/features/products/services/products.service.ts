@@ -20,11 +20,11 @@ export const productService = createApi({
         body: { id },
       }),
     }),
-    getProducts: builder.query<IProduct[], void>({
-      query: () => ({
+    getProducts: builder.query<IProduct[], { is_deleted?: boolean }>({
+      query: (data) => ({
         url: '/products/list',
         method: 'POST',
-        body: {},
+        body: data,
       }),
     }),
   }),
