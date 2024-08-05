@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
         element: <ModelsPage />,
       },
       {
-        path: '/cabinet/product-delete/:id',
+        path: '/cabinet/products/delete/:id',
         caseSensitive: true,
         element: <ProductDeletePage />,
       },
