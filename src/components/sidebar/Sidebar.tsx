@@ -37,7 +37,7 @@ const sidebarLink = [
   {
     icon: <DoubleRightOutlined />,
     label: 'KELGAN MAHSULOTLAR',
-    path: '/cabinet/products/coming',
+    path: '/cabinet/coming',
   },
   {
     icon: <CheckCircleOutlined />,
@@ -47,7 +47,7 @@ const sidebarLink = [
   {
     icon: <DoubleLeftOutlined />,
     label: 'CHIQIB KETGAN MAHSULOTLAR',
-    path: '/cabinet/products/exited',
+    path: '/cabinet/exited',
   },
 ];
 

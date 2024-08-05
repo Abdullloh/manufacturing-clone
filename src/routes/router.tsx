@@ -44,12 +44,12 @@ export const router = createBrowserRouter([
         element: <ProductsPage />,
       },
       {
-        path: '/cabinet/products/exited',
+        path: '/cabinet/exited',
         caseSensitive: true,
         element: <ExitedProductsPage />,
       },
       {
-        path: '/cabinet/products/coming',
+        path: '/cabinet/coming',
         caseSensitive: true,
         element: <IncomingProductsPage />,
       },
