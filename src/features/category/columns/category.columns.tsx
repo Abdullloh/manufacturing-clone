@@ -1,5 +1,5 @@
-import { DeleteFilled, EditFilled } from '@ant-design/icons';
-import { Flex, TableProps } from 'antd';
+import { TableProps } from 'antd';
+import { formatDate } from 'date-fns';
 import { ICategoryResponse } from '../models';
 
 export const CATEGORY_COLUMNS: TableProps<ICategoryResponse>['columns'] = [
@@ -9,13 +9,9 @@ export const CATEGORY_COLUMNS: TableProps<ICategoryResponse>['columns'] = [
     dataIndex: 'name',
   },
   {
-    title: 'Tahrirlash',
-    key: 'index',
-    render: () => (
-      <Flex gap={2}>
-        <EditFilled />
-        <DeleteFilled />
-      </Flex>
-    ),
+    title: 'Yaratilgan vaqt',
+    key: 'date',
+    dataIndex: 'created_at',
+    render: (value) => formatDate(value, 'dd-mm-yyyy'),
   },
 ];

@@ -1,9 +1,10 @@
-import { Button, Flex, Table, Typography } from 'antd';
+import { Button, Flex, Typography } from 'antd';
 import { FC, useState } from 'react';
 import { PRODUCT_COLUMNS } from '../../features/products/columns';
 import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
 import { IProduct } from '../../features/products/models';
 import { useCreateProductMutation, useGetProductsQuery } from '../../features/products/services';
+import { ReusableTable } from '../../shared/components/table';
 import { useModal } from '../../shared/hooks/useModal';
 
 const { Title } = Typography;
@@ -38,7 +39,14 @@ export const ProductsPage: FC = () => {
         </Button>
       </Flex>
 
-      <Table loading={isLoading} dataSource={data} columns={PRODUCT_COLUMNS} />
+      <ReusableTable
+        onDelete={() => {}}
+        onEdit={() => {}}
+        loading={isLoading}
+        dataSource={data}
+        columns={PRODUCT_COLUMNS}
+      />
+      {/* <Table loading={isLoading} dataSource={data} columns={PRODUCT_COLUMNS} /> */}
 
       <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />
 

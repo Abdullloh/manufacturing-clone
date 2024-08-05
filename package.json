@@ -14,6 +14,7 @@
     "@types/react-dom": "^18.3.0",
     "@yudiel/react-qr-scanner": "^2.0.4",
     "antd": "^5.19.3",
+    "date-fns": "^3.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.1",

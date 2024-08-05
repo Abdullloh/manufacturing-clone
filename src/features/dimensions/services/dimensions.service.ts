@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseApi } from '../../../api';
+import { IDimension } from '../models';
 
 export const dimensionsApi = createApi({
   reducerPath: 'dimensionsApi',
@@ -12,7 +13,7 @@ export const dimensionsApi = createApi({
         body: { valume_type_name },
       }),
     }),
-    getValumeTypeList: builder.query<{ id: string; name: string; is_deleted: boolean }[], void>({
+    getValumeTypeList: builder.query<IDimension[], void>({
       query: () => ({
         url: '/valume-type/list',
       }),

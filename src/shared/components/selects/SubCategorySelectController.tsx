@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Control } from 'react-hook-form';
 import { SelectController } from '../../../components/input';
-import { useGetSubCategoryListQuery } from '../../../features/subcategory/services';
+import { ICategoryResponseItem } from '../../../features/category/models';
+import { useGetCategoryItemMutation } from '../../../features/category/services';
 import { IOption } from '../../models';
 
 interface ISubCategorySelectController {
@@ -15,15 +16,19 @@ export const SubCategorySelectController: FC<ISubCategorySelectController> = ({
   control,
   id,
 }) => {
-  const { data } = useGetSubCategoryListQuery();
+  const [getCotegories] = useGetCategoryItemMutation();
+  const [data, setData] = useState<ICategoryResponseItem>();
 
-  const options: IOption[] = data?.map(({ name: label, id: value }) => ({ label, value })) || [];
+  const options: IOption[] = data?.sub_categories?.map((item) => ({
+    label: item?.name,
+    value: item?.id,
+  })) || [{ label: 'No data', value: '0' }];
 
-  // useEffect(() => {
-  //   if (id) {
-  //     fetchData({ id });
-  //   }
-  // }, [id, fetchData]);
+  useEffect(() => {
+    if (id) {
+      getCotegories({ id }).then((res) => setData(res.data));
+    }
+  }, [id, getCotegories]);
 
   return (
     <SelectController

@@ -1,11 +1,13 @@
-import { Button, Flex, Table, Typography } from 'antd';
+import { Button, Flex, Typography } from 'antd';
 import { FC } from 'react';
 import { CATEGORY_COLUMNS } from '../../features/category/columns';
 import { CategoryAddModal } from '../../features/category/components/modals';
+import { ICategoryResponse } from '../../features/category/models';
 import {
   useCreateCategoryMutation,
   useGetCategoryListQuery,
 } from '../../features/category/services/category.service';
+import { ReusableTable } from '../../shared/components/table';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
 
@@ -27,7 +29,13 @@ export const CategoryPage: FC = () => {
         </Button>
       </Flex>
 
-      <Table loading={isLoading} dataSource={data} columns={CATEGORY_COLUMNS} />
+      <ReusableTable<ICategoryResponse>
+        onDelete={() => {}}
+        onEdit={(id) => console.log(id)}
+        loading={isLoading}
+        dataSource={data}
+        columns={CATEGORY_COLUMNS}
+      />
 
       <CategoryAddModal
         open={isModalOpen}

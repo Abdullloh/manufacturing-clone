@@ -18,7 +18,6 @@ export const AddDimensionForm: FC<IAddDimensionsForm> = ({ onSubmit }) => {
   });
 
   const categoryId = useWatch({ control, name: 'category_id' });
-  console.log(categoryId);
 
   return (
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">

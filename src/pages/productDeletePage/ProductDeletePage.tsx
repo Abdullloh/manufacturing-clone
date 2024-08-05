@@ -11,5 +11,6 @@ export const ProductDeletePage: FC = () => {
       deleteProduct({ id }).then(window.close);
     }
   }, [id, deleteProduct]);
+
   return <div>Maxsulot uchirilmoqda</div>;
 };

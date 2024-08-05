@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseApi } from '../../../api';
+import { ICategoryResponse, ICategoryResponseItem } from '../models';
 
 export const categoryApi = createApi({
   reducerPath: 'categoryApi',
@@ -12,12 +13,20 @@ export const categoryApi = createApi({
         body: { category_name },
       }),
     }),
-    getCategoryList: builder.query<{ id: string; name: string; is_deleted: boolean }[], any>({
+    getCategoryList: builder.query<ICategoryResponse[], any>({
       query: () => ({
         url: '/category/list',
+      }),
+    }),
+    getCategoryItem: builder.mutation<ICategoryResponseItem, { id: string }>({
+      query: ({ id }) => ({
+        url: '/category/get-one',
+        body: { id },
+        method: 'POST',
       }),
     }),
   }),
 });
 
-export const { useCreateCategoryMutation, useGetCategoryListQuery } = categoryApi;
+export const { useCreateCategoryMutation, useGetCategoryListQuery, useGetCategoryItemMutation } =
+  categoryApi;

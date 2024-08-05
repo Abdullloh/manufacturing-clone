@@ -1,11 +1,13 @@
-import { Button, Flex, Table, Typography } from 'antd';
+import { Button, Flex, Typography } from 'antd';
 import { FC } from 'react';
 import { DIMENSIONS_COLUMNS } from '../../features/dimensions/columns';
 import { AddDimensionModal } from '../../features/dimensions/components/modals';
+import { IDimension } from '../../features/dimensions/models';
 import {
   useCreateDimensionMutation,
   useGetValumeTypeListQuery,
 } from '../../features/dimensions/services';
+import { ReusableTable } from '../../shared/components/table';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
 
@@ -27,7 +29,13 @@ export const DimensionsPage: FC = () => {
         </Button>
       </Flex>
 
-      <Table loading={isLoading} dataSource={data} columns={DIMENSIONS_COLUMNS} />
+      <ReusableTable<IDimension>
+        onEdit={() => {}}
+        onDelete={() => {}}
+        loading={isLoading}
+        dataSource={data}
+        columns={DIMENSIONS_COLUMNS}
+      />
 
       <AddDimensionModal
         open={isModalOpen}

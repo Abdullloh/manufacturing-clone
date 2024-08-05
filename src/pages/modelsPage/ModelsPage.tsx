@@ -1,11 +1,13 @@
-import { Button, Flex, Table, Typography } from 'antd';
+import { Button, Flex, Typography } from 'antd';
 import { FC } from 'react';
 import { MODEL_TYPES_COLUMNS } from '../../features/modelTypes/columns';
 import { AddModalTypeModal } from '../../features/modelTypes/components/modals';
+import { IModelType } from '../../features/modelTypes/models';
 import {
   useCreateModelTypeMutation,
   useGetModelTypeListQuery,
 } from '../../features/modelTypes/services';
+import { ReusableTable } from '../../shared/components/table';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
 
@@ -27,7 +29,13 @@ export const ModelsPage: FC = () => {
         </Button>
       </Flex>
 
-      <Table loading={isLoading} dataSource={data} columns={MODEL_TYPES_COLUMNS} />
+      <ReusableTable<IModelType>
+        onEdit={() => {}}
+        onDelete={() => {}}
+        loading={isLoading}
+        dataSource={data}
+        columns={MODEL_TYPES_COLUMNS}
+      />
 
       <AddModalTypeModal
         open={isModalOpen}
