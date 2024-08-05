@@ -12,7 +12,10 @@ const { RangePicker } = DatePicker;
 export const ProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal } = useModal();
   const [addProduct] = useCreateProductMutation();
-  const { data, isLoading } = useGetProductsQuery({ is_deleted: false });
+  const { data, isLoading } = useGetProductsQuery(
+    { is_deleted: false },
+    { refetchOnMountOrArgChange: true },
+  );
   const [qrCodeOpen, setQrCodeOpen] = useState<boolean>(false);
 
   const [id, setId] = useState<string>('');

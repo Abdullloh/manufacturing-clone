@@ -18,7 +18,7 @@ export const IncomingProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const [addProduct] = useCreateProductMutation();
   const [deletProducs] = useDeleteProductMutation();
-  const { data, isLoading, refetch } = useGetProductsQuery({});
+  const { data, isLoading, refetch } = useGetProductsQuery({}, { refetchOnMountOrArgChange: true });
   const [qrCodeOpen, setQrCodeOpen] = useState<boolean>(false);
 
   const [id, setId] = useState<string>('');
