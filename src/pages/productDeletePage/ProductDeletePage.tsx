@@ -8,8 +8,8 @@ export const ProductDeletePage: FC = () => {
 
   useEffect(() => {
     if (id) {
-      deleteProduct({ id });
+      deleteProduct({ id }).then(window.close);
     }
   }, [id, deleteProduct]);
-  return <div>ProductDeletePage</div>;
+  return <div>Maxsulot uchirilmoqda</div>;
 };

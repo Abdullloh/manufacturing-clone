@@ -20,9 +20,9 @@ export const productService = createApi({
         body: { id },
       }),
     }),
-    getProducts: builder.mutation<IProduct[], {}>({
-      query: ({}) => ({
-        url: '/pruducts/list',
+    getProducts: builder.query<IProduct[], void>({
+      query: () => ({
+        url: '/products/list',
         method: 'POST',
         body: {},
       }),
@@ -30,5 +30,5 @@ export const productService = createApi({
   }),
 });
 
-export const { useCreateProductMutation, useDeleteProductMutation, useGetProductsMutation } =
+export const { useCreateProductMutation, useDeleteProductMutation, useGetProductsQuery } =
   productService;
