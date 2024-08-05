@@ -13,7 +13,7 @@ export const QRCodeGenerator: FC<IQRCodeGenerator> = ({ value }) => {
         style={{ height: '100%', width: '100%', alignItems: 'center', justifyContent: 'center' }}
       >
         <QRCode
-          value={`${window.location.protocol}${window.location.host}/products/delete/${value}`}
+          value={`${window.location.protocol}${window.location.host}/cabinet/products/delete/${value}`}
         />
       </Flex>
     </Flex>
