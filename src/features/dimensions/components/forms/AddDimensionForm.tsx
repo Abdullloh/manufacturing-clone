@@ -22,7 +22,7 @@ export const AddDimensionForm: FC<IAddDimensionsForm> = ({ onSubmit }) => {
   return (
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">
       <CategorySelectController control={control} name="category_id" />
-      <SubCategorySelectController control={control} name="subcategory_id" id={categoryId} />
+      <SubCategorySelectController control={control} name="sub_category_id" id={categoryId} />
       <InputController control={control} name="valume_type_name" label="O'lchov birligi nomi" />
       <Button type="primary" htmlType="submit">
         Submit

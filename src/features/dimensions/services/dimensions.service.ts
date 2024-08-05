@@ -6,11 +6,11 @@ export const dimensionsApi = createApi({
   reducerPath: 'dimensionsApi',
   baseQuery: baseApi,
   endpoints: (builder) => ({
-    createDimension: builder.mutation<any, { valume_type_name: string }>({
-      query: ({ valume_type_name }) => ({
+    createDimension: builder.mutation<any, { valume_type_name: string; sub_category_id: string }>({
+      query: ({ valume_type_name, sub_category_id }) => ({
         url: '/valume-type/create',
         method: 'POST',
-        body: { valume_type_name },
+        body: { valume_type_name, sub_category_id },
       }),
     }),
     deleteDimension: builder.mutation<any, { id: string }>({

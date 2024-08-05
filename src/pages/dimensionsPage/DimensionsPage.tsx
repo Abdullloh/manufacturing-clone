@@ -23,6 +23,8 @@ export const DimensionsPage: FC = () => {
   };
 
   const handleCreateCategory = (values: any) => {
+    console.log(values);
+
     addDimension(values).then(handleCloseModal).then(refetch);
   };
 
