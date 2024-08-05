@@ -19,7 +19,7 @@ export const SubCategoryCreateForm: FC<ISubCategoryCreateForm> = ({ onSubmit }) 
       <CategorySelectController control={control} name="category_id" />
       <InputController control={control} name="sub_category_name" label="Subkategoriya nomi" />
       <Button type="primary" htmlType="submit">
-        Submit
+        Qo'shish
       </Button>
     </FormComponent>
   );

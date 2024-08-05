@@ -9,7 +9,7 @@ export const SidebarLink: FC<{ label: string; path: string; icon: any }> = ({
 }) => {
   return (
     <StyledLink to={path}>
-      <Flex gap={2}>
+      <Flex gap={10}>
         {icon}
         {label}
       </Flex>

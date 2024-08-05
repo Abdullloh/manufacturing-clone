@@ -3,9 +3,19 @@ import { IProduct } from '../models';
 
 export const PRODUCT_COLUMNS: TableProps<IProduct>['columns'] = [
   {
-    title: 'Nomi',
+    title: 'Mahsulot nomi',
     key: 'name',
     dataIndex: 'product_name',
+  },
+  {
+    title: 'Kategoriya',
+    key: 'category_name',
+    dataIndex: 'category_name',
+  },
+  {
+    title: 'Subkategoriya',
+    key: 'sub_category_name',
+    dataIndex: 'sub_category_name',
   },
   {
     title: 'Rangi',
@@ -16,6 +26,11 @@ export const PRODUCT_COLUMNS: TableProps<IProduct>['columns'] = [
     title: 'Kodi',
     key: 'code',
     dataIndex: 'code',
+  },
+  {
+    title: 'Narxi',
+    key: 'price',
+    dataIndex: 'price',
   },
   {
     title: 'Soni',

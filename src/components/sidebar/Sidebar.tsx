@@ -1,6 +1,7 @@
 import {
+  BgColorsOutlined,
   CopyOutlined,
-  FormatPainterOutlined,
+  LineHeightOutlined,
   ScissorOutlined,
   SnippetsOutlined,
 } from '@ant-design/icons';
@@ -13,27 +14,27 @@ import { StyledLink } from './styled';
 const sidebarLink = [
   {
     icon: <SnippetsOutlined />,
-    label: 'Kategoriyalar',
+    label: 'KATEGORIYA',
     path: '/cabinet/category',
   },
   {
     icon: <CopyOutlined />,
-    label: 'Subkategoriyalar',
+    label: 'SUBKATEGORIYA',
     path: '/cabinet/subcategory',
   },
   {
-    icon: <ScissorOutlined />,
-    label: "O'lchov birligi",
+    icon: <LineHeightOutlined />,
+    label: "O'LCHOV BIRLIGI",
     path: '/cabinet/dimensions',
   },
   {
-    icon: <FormatPainterOutlined />,
-    label: 'Model turlari',
+    icon: <BgColorsOutlined />,
+    label: 'MODEL',
     path: '/cabinet/model-types',
   },
   {
-    icon: <></>,
-    label: 'Mahsulotlar',
+    icon: <ScissorOutlined />,
+    label: 'MAHSULOTLAR',
     path: '/cabinet/products',
   },
 ];
@@ -47,9 +48,8 @@ export const Sidebar: FC = () => {
           <SidebarLink key={idx} {...item} />
         ))}
       </Flex>
-      <StyledLink to="/" style={{ color: 'red' }}>
-        {' '}
-        Tizimdan chiqish{' '}
+      <StyledLink to="/" style={{ color: '#fff', background: '#2b4c77' }}>
+        TIZIMDAN CHIQISH
       </StyledLink>
     </Flex>
   );

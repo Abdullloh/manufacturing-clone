@@ -29,7 +29,7 @@ export const ModelsPage: FC = () => {
   return (
     <Flex vertical style={{ width: '100%' }}>
       <Flex justify="space-between">
-        <Title level={2}>Model turlari ruyhati</Title>
+        <Title level={2}>MODEL TURLARI RO'YXATI</Title>
         <Button type="primary" onClick={handleOpenModal}>
           Qo'shish
         </Button>

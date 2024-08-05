@@ -31,7 +31,7 @@ export const DimensionsPage: FC = () => {
   return (
     <Flex vertical style={{ width: '100%' }}>
       <Flex justify="space-between">
-        <Title level={2}>O'lchov birliklari ruyhati</Title>
+        <Title level={2}>O'LCHOV BIRLIKLARI RO'YXATI</Title>
         <Button type="primary" onClick={handleOpenModal}>
           Qo'shish
         </Button>
@@ -47,7 +47,7 @@ export const DimensionsPage: FC = () => {
 
       <AddDimensionModal
         open={isModalOpen}
-        title="Subkategoriya qo'shish"
+        title="O'LCHOV BIRLIGI QO'SHISH"
         onSubmit={handleCreateCategory}
         onOk={() => {}}
         onCancel={handleCloseModal}

@@ -25,7 +25,7 @@ export const AddDimensionForm: FC<IAddDimensionsForm> = ({ onSubmit }) => {
       <SubCategorySelectController control={control} name="sub_category_id" id={categoryId} />
       <InputController control={control} name="valume_type_name" label="O'lchov birligi nomi" />
       <Button type="primary" htmlType="submit">
-        Submit
+        Qo'shish
       </Button>
     </FormComponent>
   );

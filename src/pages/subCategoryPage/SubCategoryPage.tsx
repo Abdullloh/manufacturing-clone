@@ -30,7 +30,7 @@ export const SubCategoryPage: FC = () => {
   return (
     <Flex vertical style={{ width: '100%' }}>
       <Flex justify="space-between">
-        <Title level={2}>Sub kategoriyalar ruyhati </Title>
+        <Title level={2}>SUBKATEGORIYALAR RO'YXATI </Title>
         <Button type="primary" onClick={handleOpenModal}>
           Qo'shish
         </Button>

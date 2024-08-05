@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Control } from 'react-hook-form';
 import { SelectController } from '../../../components/input';
-import { useGetValumeTypeListQuery } from '../../../features/dimensions/services';
+import { ISubcategoryItem } from '../../../features/subcategory/models';
+import { useGetSubCategoryItemMutation } from '../../../features/subcategory/services';
 import { IOption } from '../../models';
 
 interface ISelectValumeController {
@@ -11,15 +12,17 @@ interface ISelectValumeController {
 }
 
 export const SelectValumeController: FC<ISelectValumeController> = ({ name, control, id }) => {
-  const { data } = useGetValumeTypeListQuery();
+  const [getValumes] = useGetSubCategoryItemMutation();
+  const [data, setData] = useState<ISubcategoryItem>();
 
-  const options: IOption[] = data?.map(({ name: label, id: value }) => ({ label, value })) || [];
+  const options: IOption[] =
+    data?.valume_types.map(({ name: label, id: value }) => ({ label, value })) || [];
 
-  //   useEffect(() => {
-  //     if (id) {
-  //       fetchData({ id });
-  //     }
-  //   }, [id, fetchData]);
+  useEffect(() => {
+    if (id) {
+      getValumes({ id }).then((res) => setData(res.data));
+    }
+  }, [id, getValumes]);
 
   return (
     <SelectController

@@ -4,12 +4,12 @@ import { ICategoryResponse } from '../models';
 
 export const CATEGORY_COLUMNS: TableProps<ICategoryResponse>['columns'] = [
   {
-    title: 'Name',
+    title: 'Kategoriya nomi',
     key: 'name',
     dataIndex: 'name',
   },
   {
-    title: 'Yaratilgan vaqt',
+    title: 'Yaratilgan vaqtI',
     key: 'date',
     dataIndex: 'created_at',
     render: (value) => formatDate(value, 'dd-mm-yyyy'),

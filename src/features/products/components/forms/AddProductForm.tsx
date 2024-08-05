@@ -18,13 +18,14 @@ export const AddProductForm: FC<IAddProductForm> = ({ onSubmit }) => {
   });
 
   const categoryId = useWatch({ control, name: 'category_id' });
+  const subCategoryId = useWatch({ control, name: 'sub_category_id' });
 
   return (
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">
       <InputController control={control} name="product_name" label="Mahsulot nomi" />
       <CategorySelectController control={control} name="category_id" />
       <SubCategorySelectController control={control} name="sub_category_id" id={categoryId} />
-      <SelectValumeController control={control} name="valume_type_id" />
+      <SelectValumeController control={control} name="valume_type_id" id={subCategoryId} />
       <InputController control={control} name="value" label="Miqdori" />
       <InputController control={control} name="color" label="Rangi" />
       <InputController control={control} name="code" label="Kodi" />
@@ -42,7 +43,7 @@ export const AddProductForm: FC<IAddProductForm> = ({ onSubmit }) => {
       </Flex>
       <SelectModelTypeController control={control} name="model_id" />
       <Button type="primary" htmlType="submit">
-        Submit
+        Qo'shish
       </Button>
     </FormComponent>
   );

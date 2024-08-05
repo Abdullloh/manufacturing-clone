@@ -18,7 +18,7 @@ export const CategoryCreateForm: FC<ICategoryCreateForm> = ({ onSubmit, defaultV
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">
       <InputController control={control} name="category_name" label="Kategoriya nomi" />
       <Button type="primary" htmlType="submit">
-        Submit
+        Qo'shish
       </Button>
     </FormComponent>
   );

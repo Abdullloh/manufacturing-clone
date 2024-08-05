@@ -17,7 +17,7 @@ export const AddModelTypeForm: FC<IAddModalTypeForm> = ({ onSubmit }) => {
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">
       <InputController control={control} name="model_name" label="Model nomi" />
       <Button type="primary" htmlType="submit">
-        Submit
+        Qo'shish
       </Button>
     </FormComponent>
   );

@@ -51,7 +51,7 @@ export const ProductsPage: FC = () => {
   return (
     <Flex vertical style={{ width: '100%' }}>
       <Flex justify="space-between">
-        <Title level={2}>Mahsulotlar ruyhati </Title>
+        <Title level={2}>MAXSULOTLAR RO'YXATI </Title>
         <Button type="primary" onClick={handleOpenModal}>
           Qo'shish
         </Button>
@@ -75,7 +75,6 @@ export const ProductsPage: FC = () => {
         dataSource={data}
         columns={PRODUCT_COLUMNS}
       />
-      {/* <Table loading={isLoading} dataSource={data} columns={PRODUCT_COLUMNS} /> */}
 
       <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />
       <AddProductModal
