@@ -5,6 +5,7 @@ import { AddModalTypeModal } from '../../features/modelTypes/components/modals';
 import { IModelType } from '../../features/modelTypes/models';
 import {
   useCreateModelTypeMutation,
+  useDeleteModelTypeMutation,
   useGetModelTypeListQuery,
 } from '../../features/modelTypes/services';
 import { ReusableTable } from '../../shared/components/table';
@@ -14,7 +15,12 @@ const { Title } = Typography;
 export const ModelsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const [addModalType] = useCreateModelTypeMutation();
+  const [deleteModelType] = useDeleteModelTypeMutation();
   const { data, isLoading, refetch } = useGetModelTypeListQuery();
+
+  const handleDeleteModelType = (id: string) => {
+    deleteModelType({ id }).then(refetch);
+  };
 
   const handleAddModelType = (values: any) => {
     addModalType({ model_name: values.model_name }).then(handleCloseModal).then(refetch);
@@ -31,7 +37,7 @@ export const ModelsPage: FC = () => {
 
       <ReusableTable<IModelType>
         onEdit={() => {}}
-        onDelete={() => {}}
+        onDelete={handleDeleteModelType}
         loading={isLoading}
         dataSource={data}
         columns={MODEL_TYPES_COLUMNS}

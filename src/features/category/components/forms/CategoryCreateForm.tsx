@@ -6,11 +6,12 @@ import { InputController } from '../../../../components/input';
 
 interface ICategoryCreateForm {
   onSubmit: (values: any) => void;
+  defaultValues: any;
 }
 
-export const CategoryCreateForm: FC<ICategoryCreateForm> = ({ onSubmit }) => {
+export const CategoryCreateForm: FC<ICategoryCreateForm> = ({ onSubmit, defaultValues = {} }) => {
   const { control, handleSubmit } = useForm({
-    defaultValues: {},
+    defaultValues,
   });
 
   return (

@@ -1,10 +1,11 @@
 import { Button, Flex, Typography } from 'antd';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { CATEGORY_COLUMNS } from '../../features/category/columns';
 import { CategoryAddModal } from '../../features/category/components/modals';
 import { ICategoryResponse } from '../../features/category/models';
 import {
   useCreateCategoryMutation,
+  useDeleteCategoryMutation,
   useGetCategoryListQuery,
 } from '../../features/category/services/category.service';
 import { ReusableTable } from '../../shared/components/table';
@@ -15,9 +16,20 @@ export const CategoryPage: FC = () => {
   const [addCategory] = useCreateCategoryMutation();
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const { data, isLoading, refetch } = useGetCategoryListQuery({});
+  const [deleteCategory] = useDeleteCategoryMutation();
+  const [id, setId] = useState<string>('');
 
   const handleCreateCategory = (values: any) => {
     addCategory(values).then(handleCloseModal).then(refetch);
+  };
+
+  const handleDeleteCategory = (id: string) => {
+    deleteCategory({ id }).then(refetch);
+  };
+
+  const handleEditCategory = (id: string) => {
+    setId(id);
+    handleOpenModal();
   };
 
   return (
@@ -30,14 +42,15 @@ export const CategoryPage: FC = () => {
       </Flex>
 
       <ReusableTable<ICategoryResponse>
-        onDelete={() => {}}
-        onEdit={(id) => console.log(id)}
+        onDelete={handleDeleteCategory}
+        onEdit={handleEditCategory}
         loading={isLoading}
         dataSource={data}
         columns={CATEGORY_COLUMNS}
       />
 
       <CategoryAddModal
+        id={id}
         open={isModalOpen}
         title="Kategoriya qo'shish"
         onSubmit={handleCreateCategory}

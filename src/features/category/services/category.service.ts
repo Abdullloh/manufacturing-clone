@@ -25,8 +25,27 @@ export const categoryApi = createApi({
         method: 'POST',
       }),
     }),
+    deleteCategory: builder.mutation<any, { id: string }>({
+      query: ({ id }) => ({
+        url: '/category/delete',
+        body: { id },
+        method: 'POST',
+      }),
+    }),
+    updateCategory: builder.mutation<ICategoryResponseItem, { id: string }>({
+      query: ({ id }) => ({
+        url: '/category/update',
+        body: { id },
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
-export const { useCreateCategoryMutation, useGetCategoryListQuery, useGetCategoryItemMutation } =
-  categoryApi;
+export const {
+  useCreateCategoryMutation,
+  useGetCategoryListQuery,
+  useGetCategoryItemMutation,
+  useDeleteCategoryMutation,
+  useUpdateCategoryMutation,
+} = categoryApi;

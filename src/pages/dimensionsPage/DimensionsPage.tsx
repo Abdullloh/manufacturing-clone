@@ -5,6 +5,7 @@ import { AddDimensionModal } from '../../features/dimensions/components/modals';
 import { IDimension } from '../../features/dimensions/models';
 import {
   useCreateDimensionMutation,
+  useDeleteDimensionMutation,
   useGetValumeTypeListQuery,
 } from '../../features/dimensions/services';
 import { ReusableTable } from '../../shared/components/table';
@@ -14,7 +15,12 @@ const { Title } = Typography;
 export const DimensionsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const [addDimension] = useCreateDimensionMutation();
+  const [deleteDimension] = useDeleteDimensionMutation();
   const { data, isLoading, refetch } = useGetValumeTypeListQuery();
+
+  const handleDeleteDimension = (id: string) => {
+    deleteDimension({ id }).then(refetch);
+  };
 
   const handleCreateCategory = (values: any) => {
     addDimension(values).then(handleCloseModal).then(refetch);
@@ -31,7 +37,7 @@ export const DimensionsPage: FC = () => {
 
       <ReusableTable<IDimension>
         onEdit={() => {}}
-        onDelete={() => {}}
+        onDelete={handleDeleteDimension}
         loading={isLoading}
         dataSource={data}
         columns={DIMENSIONS_COLUMNS}

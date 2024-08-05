@@ -13,6 +13,20 @@ export const modelApi = createApi({
         body: { model_name },
       }),
     }),
+    deleteModelType: builder.mutation<any, { id: string }>({
+      query: ({ id }) => ({
+        url: '/model-type/delete',
+        method: 'POST',
+        body: { id },
+      }),
+    }),
+    updateModelType: builder.mutation<any, { model_name: string }>({
+      query: ({ model_name }) => ({
+        url: '/model-type/update',
+        method: 'POST',
+        body: { model_name },
+      }),
+    }),
     getModelTypeList: builder.query<IModelType[], void>({
       query: () => ({
         url: '/model-type/list',
@@ -21,4 +35,9 @@ export const modelApi = createApi({
   }),
 });
 
-export const { useCreateModelTypeMutation, useGetModelTypeListQuery } = modelApi;
+export const {
+  useCreateModelTypeMutation,
+  useGetModelTypeListQuery,
+  useDeleteModelTypeMutation,
+  useUpdateModelTypeMutation,
+} = modelApi;

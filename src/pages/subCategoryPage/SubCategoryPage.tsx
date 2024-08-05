@@ -5,6 +5,7 @@ import { SubCategoryAddModal } from '../../features/subcategory/components/modal
 import { ISubcategory } from '../../features/subcategory/models';
 import {
   useCreateSubCategoryMutation,
+  useDeleteSubCategoryMutation,
   useGetSubCategoryListQuery,
 } from '../../features/subcategory/services';
 import { ReusableTable } from '../../shared/components/table';
@@ -15,6 +16,11 @@ export const SubCategoryPage: FC = () => {
   const [addSubCategory] = useCreateSubCategoryMutation();
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const { data, refetch, isLoading } = useGetSubCategoryListQuery();
+  const [deleteSubCategory] = useDeleteSubCategoryMutation();
+
+  const handleDeleteSubCategory = (id: string) => {
+    deleteSubCategory({ id }).then(refetch);
+  };
 
   const handleCreateCategory = (values: any) => {
     addSubCategory(values).then(refetch);
@@ -32,7 +38,7 @@ export const SubCategoryPage: FC = () => {
 
       <ReusableTable<ISubcategory>
         onEdit={() => {}}
-        onDelete={() => {}}
+        onDelete={handleDeleteSubCategory}
         loading={isLoading}
         dataSource={data}
         columns={SUB_CATEGORY_COLUMNS}
