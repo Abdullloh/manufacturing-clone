@@ -20,7 +20,7 @@ export const ModelsPage: FC = () => {
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const [deleteModelType] = useDeleteModelTypeMutation();
   const { data, isLoading, refetch } = useGetModelTypeListQuery(
-    { keyword: debouncedValue, from_date, to_date },
+    Object.assign({ keyword: debouncedValue }, from_date && to_date ? { from_date, to_date } : {}),
     { refetchOnMountOrArgChange: true },
   );
   const handleDeleteModelType = (id: string) => {

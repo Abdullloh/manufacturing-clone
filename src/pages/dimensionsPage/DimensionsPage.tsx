@@ -20,7 +20,8 @@ export const DimensionsPage: FC = () => {
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const [deleteDimension] = useDeleteDimensionMutation();
   const { data, isLoading, refetch } = useGetValumeTypeListQuery(
-    { keyword: debouncedValue, from_date, to_date },
+    Object.assign({ keyword: debouncedValue }, from_date && to_date ? { from_date, to_date } : {}),
+
     { refetchOnMountOrArgChange: true },
   );
   const handleDeleteDimension = (id: string) => {

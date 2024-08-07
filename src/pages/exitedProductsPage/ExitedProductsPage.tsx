@@ -14,7 +14,11 @@ export const ExitedProductsPage: FC = () => {
   const [addProduct] = useCreateProductMutation();
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const { data, isLoading } = useGetProductsQuery(
-    { is_deleted: true, keyword: debouncedValue, from_date, to_date },
+    Object.assign(
+      { keyword: debouncedValue, is_deleted: true },
+      from_date && to_date ? { from_date, to_date } : {},
+    ),
+
     { refetchOnMountOrArgChange: true },
   );
   const [qrCodeOpen, setQrCodeOpen] = useState<boolean>(false);
