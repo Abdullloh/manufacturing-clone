@@ -1,4 +1,4 @@
-import { Button, DatePicker, Flex, Input, Typography } from 'antd';
+import { Button, DatePicker, Flex, Typography } from 'antd';
 import { FC, useState } from 'react';
 import { PRODUCT_COLUMNS } from '../../features/products/columns';
 import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
@@ -8,6 +8,7 @@ import {
   useDeleteProductMutation,
   useGetProductsQuery,
 } from '../../features/products/services';
+import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
 import { useModal } from '../../shared/hooks/useModal';
 
@@ -48,10 +49,9 @@ export const IncomingProductsPage: FC = () => {
           Qo'shish
         </Button>
       </Flex>
-      <Flex justify="flex-end" style={{ marginBottom: 10 }} gap={5}>
-        <Input placeholder="Qidiruv" />
-        <RangePicker />
-      </Flex>
+
+      <Filter />
+
       <ReusableTable
         onDelete={handleDeleteProduct}
         onEdit={() => {}}

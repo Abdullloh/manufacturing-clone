@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons';
 import { Flex } from 'antd';
 import { FC } from 'react';
-import { Logo } from '../../shared/components/logo';
+import { Logo } from '../logo';
 import { SidebarLink } from './SidebarLink';
 import { StyledLink } from './styled';
 

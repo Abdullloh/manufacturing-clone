@@ -1,6 +1,6 @@
 import { ModalProps } from 'antd';
 import { FC } from 'react';
-import { ModalBase } from '../../../../components/modal';
+import { ModalBase } from '../../../../shared/components/modal';
 import { SubCategoryCreateForm } from '../forms';
 
 interface ISubCategorAddModal extends ModalProps {

@@ -1,4 +1,4 @@
-import { Button, DatePicker, Flex, Input, Typography } from 'antd';
+import { Button, Flex, Typography } from 'antd';
 import { FC, useState } from 'react';
 import { CATEGORY_COLUMNS } from '../../features/category/columns';
 import { CategoryAddModal } from '../../features/category/components/modals';
@@ -8,10 +8,10 @@ import {
   useDeleteCategoryMutation,
   useGetCategoryListQuery,
 } from '../../features/category/services/category.service';
+import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
-import { useModal } from '../../shared/hooks/useModal';
+import { useModal } from '../../shared/hooks';
 const { Title } = Typography;
-const { RangePicker } = DatePicker;
 
 export const CategoryPage: FC = () => {
   const [addCategory] = useCreateCategoryMutation();
@@ -41,10 +41,7 @@ export const CategoryPage: FC = () => {
           Qo'shish
         </Button>
       </Flex>
-      <Flex justify="flex-end" style={{ marginBottom: 10 }} gap={5}>
-        <Input placeholder="Qidiruv" />
-        <RangePicker />
-      </Flex>
+      <Filter />
       <ReusableTable<ICategoryResponse>
         onDelete={handleDeleteCategory}
         onEdit={handleEditCategory}

@@ -1,4 +1,4 @@
-import { Button, DatePicker, Flex, Input, Typography } from 'antd';
+import { Button, Flex, Typography } from 'antd';
 import { FC } from 'react';
 import { SUB_CATEGORY_COLUMNS } from '../../features/subcategory/columns';
 import { SubCategoryAddModal } from '../../features/subcategory/components/modals';
@@ -8,11 +8,10 @@ import {
   useDeleteSubCategoryMutation,
   useGetSubCategoryListQuery,
 } from '../../features/subcategory/services';
+import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
-
-const { RangePicker } = DatePicker;
 
 export const SubCategoryPage: FC = () => {
   const [addSubCategory] = useCreateSubCategoryMutation();
@@ -38,10 +37,7 @@ export const SubCategoryPage: FC = () => {
         </Button>
       </Flex>
 
-      <Flex justify="flex-end" style={{ marginBottom: 10 }} gap={5}>
-        <Input placeholder="Qidiruv" />
-        <RangePicker />
-      </Flex>
+      <Filter />
 
       <ReusableTable<ISubcategory>
         onEdit={() => {}}

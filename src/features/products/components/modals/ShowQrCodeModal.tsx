@@ -1,7 +1,7 @@
 import { Button, Flex, ModalProps } from 'antd';
 import { FC } from 'react';
-import { QRCodeGenerator } from '../../../../components';
-import { ModalBase } from '../../../../components/modal';
+import { QRCodeGenerator } from '../../../../shared/components';
+import { ModalBase } from '../../../../shared/components/modal';
 
 interface IShowQrCodeModal extends ModalProps {
   value: string;

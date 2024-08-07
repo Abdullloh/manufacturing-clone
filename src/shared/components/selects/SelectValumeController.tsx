@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import { Control } from 'react-hook-form';
-import { SelectController } from '../../../components/input';
 import { ISubcategoryItem } from '../../../features/subcategory/models';
 import { useGetSubCategoryItemMutation } from '../../../features/subcategory/services';
 import { IOption } from '../../models';
+import { SelectController } from '../input';
 
 interface ISelectValumeController {
   name: string;

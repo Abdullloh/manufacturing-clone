@@ -1,6 +1,6 @@
 import { ModalProps } from 'antd';
 import { FC, useEffect, useState } from 'react';
-import { ModalBase } from '../../../../components/modal';
+import { ModalBase } from '../../../../shared/components/modal';
 import { useGetCategoryItemMutation } from '../../services';
 import { CategoryCreateForm } from '../forms';
 

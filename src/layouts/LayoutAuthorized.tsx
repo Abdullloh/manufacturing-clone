@@ -1,7 +1,7 @@
 import { Flex } from 'antd';
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Sidebar } from '../components';
+import { Sidebar } from '../shared/components';
 
 export const LayoutAuthorized: FC = () => {
   return (

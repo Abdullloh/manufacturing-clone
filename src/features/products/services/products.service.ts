@@ -20,6 +20,13 @@ export const productService = createApi({
         body: { id },
       }),
     }),
+    decrementProduct: builder.mutation<any, { id: string }>({
+      query: ({ id }) => ({
+        url: '/out-product/out',
+        method: 'POST',
+        body: { id },
+      }),
+    }),
     getProducts: builder.query<IProduct[], { is_deleted?: boolean }>({
       query: (data) => ({
         url: '/products/list',
@@ -30,5 +37,9 @@ export const productService = createApi({
   }),
 });
 
-export const { useCreateProductMutation, useDeleteProductMutation, useGetProductsQuery } =
-  productService;
+export const {
+  useCreateProductMutation,
+  useDeleteProductMutation,
+  useGetProductsQuery,
+  useDecrementProductMutation,
+} = productService;

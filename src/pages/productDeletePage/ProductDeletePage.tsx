@@ -1,25 +1,25 @@
 import { Flex, Typography } from 'antd';
 import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDeleteProductMutation } from '../../features/products/services';
+import { useDecrementProductMutation } from '../../features/products/services';
 
 const { Title } = Typography;
 
 export const ProductDeletePage: FC = () => {
   const { id } = useParams();
-  const [deleteProduct] = useDeleteProductMutation();
+  const [decrementProductCount] = useDecrementProductMutation();
   const [success, setSucced] = useState(false);
+
   useEffect(() => {
     if (id) {
-      deleteProduct({ id }).then(() => setSucced(true));
+      decrementProductCount({ id }).then(() => setSucced(true));
     }
-  }, [id, deleteProduct]);
+  }, [id, decrementProductCount]);
 
   return (
     <Flex justify="center" align="center">
       {success ? (
         <Title style={{ color: 'green' }} level={5}>
-          {' '}
           Mahsulot muvaffaqiyatli o'chirildi
         </Title>
       ) : (

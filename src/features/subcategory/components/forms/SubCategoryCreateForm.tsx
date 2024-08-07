@@ -1,8 +1,7 @@
 import { Button } from 'antd';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormComponent } from '../../../../components/form';
-import { InputController } from '../../../../components/input';
+import { FormComponent, InputController } from '../../../../shared/components';
 import { CategorySelectController } from '../../../../shared/components/selects';
 
 interface ISubCategoryCreateForm {

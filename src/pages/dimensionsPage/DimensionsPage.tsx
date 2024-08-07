@@ -1,4 +1,4 @@
-import { Button, DatePicker, Flex, Input, Typography } from 'antd';
+import { Button, Flex, Typography } from 'antd';
 import { FC } from 'react';
 import { DIMENSIONS_COLUMNS } from '../../features/dimensions/columns';
 import { AddDimensionModal } from '../../features/dimensions/components/modals';
@@ -8,10 +8,10 @@ import {
   useDeleteDimensionMutation,
   useGetValumeTypeListQuery,
 } from '../../features/dimensions/services';
+import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
-const { RangePicker } = DatePicker;
 
 export const DimensionsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
@@ -37,10 +37,7 @@ export const DimensionsPage: FC = () => {
           Qo'shish
         </Button>
       </Flex>
-      <Flex justify="flex-end" style={{ marginBottom: 10 }} gap={5}>
-        <Input placeholder="Qidiruv" />
-        <RangePicker />
-      </Flex>
+      <Filter />
       <ReusableTable<IDimension>
         onEdit={() => {}}
         onDelete={handleDeleteDimension}

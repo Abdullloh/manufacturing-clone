@@ -1,13 +1,13 @@
-import { DatePicker, Flex, Input, Table, Typography } from 'antd';
+import { Flex, Table, Typography } from 'antd';
 import { FC, useState } from 'react';
 import { PRODUCT_COLUMNS } from '../../features/products/columns';
 import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
 import { IProduct } from '../../features/products/models';
 import { useCreateProductMutation, useGetProductsQuery } from '../../features/products/services';
-import { useModal } from '../../shared/hooks/useModal';
+import { Filter } from '../../shared/components/filter';
+import { useModal } from '../../shared/hooks';
 
 const { Title } = Typography;
-const { RangePicker } = DatePicker;
 
 export const ExitedProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal } = useModal();
@@ -38,10 +38,7 @@ export const ExitedProductsPage: FC = () => {
       <Flex justify="space-between">
         <Title level={2}>MAXSULOTLAR RO'YXATI </Title>
       </Flex>
-      <Flex justify="flex-end" style={{ marginBottom: 10 }} gap={5}>
-        <Input placeholder="Qidiruv" />
-        <RangePicker />
-      </Flex>
+      <Filter />
       <Table loading={isLoading} dataSource={data} columns={PRODUCT_COLUMNS} />
 
       <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />

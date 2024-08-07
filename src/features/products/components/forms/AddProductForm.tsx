@@ -1,8 +1,7 @@
 import { Button, Flex } from 'antd';
 import { FC } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { FormComponent } from '../../../../components/form';
-import { InputController, SelectController } from '../../../../components/input';
+import { FormComponent, InputController, SelectController } from '../../../../shared/components';
 import {
   CategorySelectController,
   SelectModelTypeController,

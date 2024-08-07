@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Control } from 'react-hook-form';
-import { SelectController } from '../../../components/input';
 import { useGetCategoryListQuery } from '../../../features/category/services';
 import { IOption } from '../../models';
+import { SelectController } from '../input';
 
 interface ICategorySelect {
   name: string;

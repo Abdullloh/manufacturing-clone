@@ -1,6 +1,6 @@
 import { ModalProps } from 'antd';
 import { FC } from 'react';
-import { ModalBase } from '../../../../components/modal';
+import { ModalBase } from '../../../../shared/components/modal';
 import { AddModelTypeForm } from '../forms';
 
 interface IAddModalTypeModal extends ModalProps {
