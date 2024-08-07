@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseApi } from '../../../api';
+import { IQuery } from '../../../shared/models';
 import { ICategoryResponse, ICategoryResponseItem } from '../models';
 
 export const categoryApi = createApi({
@@ -13,9 +14,11 @@ export const categoryApi = createApi({
         body: { category_name },
       }),
     }),
-    getCategoryList: builder.query<ICategoryResponse[], any>({
-      query: () => ({
+    getCategoryList: builder.query<ICategoryResponse[], IQuery>({
+      query: (body) => ({
         url: '/category/list',
+        method: 'POST',
+        body,
       }),
     }),
     getCategoryItem: builder.mutation<ICategoryResponseItem, { id: string }>({

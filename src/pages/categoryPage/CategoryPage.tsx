@@ -10,13 +10,17 @@ import {
 } from '../../features/category/services/category.service';
 import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
-import { useModal } from '../../shared/hooks';
+import { useFilter, useModal } from '../../shared/hooks';
 const { Title } = Typography;
 
 export const CategoryPage: FC = () => {
   const [addCategory] = useCreateCategoryMutation();
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
-  const { data, isLoading, refetch } = useGetCategoryListQuery({});
+  const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
+  const { data, isLoading, refetch } = useGetCategoryListQuery(
+    { keyword: debouncedValue, from_date, to_date },
+    { refetchOnMountOrArgChange: true },
+  );
   const [deleteCategory] = useDeleteCategoryMutation();
   const [id, setId] = useState<string>('');
 
@@ -41,7 +45,7 @@ export const CategoryPage: FC = () => {
           Qo'shish
         </Button>
       </Flex>
-      <Filter />
+      <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />
       <ReusableTable<ICategoryResponse>
         onDelete={handleDeleteCategory}
         onEdit={handleEditCategory}

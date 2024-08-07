@@ -5,6 +5,7 @@ import { AddProductModal, ShowQrCodeModal } from '../../features/products/compon
 import { IProduct } from '../../features/products/models';
 import { useCreateProductMutation, useGetProductsQuery } from '../../features/products/services';
 import { Filter } from '../../shared/components/filter';
+import { useFilter } from '../../shared/hooks';
 import { useModal } from '../../shared/hooks/useModal';
 
 const { Title } = Typography;
@@ -12,8 +13,9 @@ const { Title } = Typography;
 export const ProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal } = useModal();
   const [addProduct] = useCreateProductMutation();
+  const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const { data, isLoading } = useGetProductsQuery(
-    { is_deleted: false },
+    { is_deleted: false, keyword: debouncedValue, from_date, to_date },
     { refetchOnMountOrArgChange: true },
   );
   const [qrCodeOpen, setQrCodeOpen] = useState<boolean>(false);
@@ -39,7 +41,7 @@ export const ProductsPage: FC = () => {
         <Title level={2}>MAXSULOTLAR RO'YXATI </Title>
       </Flex>
 
-      <Filter />
+      <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />
 
       <Table loading={isLoading} dataSource={data} columns={PRODUCT_COLUMNS} />
 

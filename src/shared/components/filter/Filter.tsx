@@ -1,24 +1,17 @@
 import { DatePicker, Flex, Input } from 'antd';
-import { ChangeEvent, FC, useState } from 'react';
-import useDebounce from '../../hooks/useDebaunce';
+import { ChangeEvent, FC } from 'react';
 const { RangePicker } = DatePicker;
 
-export const Filter: FC = () => {
-  const [inputValue, setInputValue] = useState<string>('');
+interface IFilter {
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleRangeChange: (dates: any, dateString: any) => void;
+}
 
-  const debouncedValue = useDebounce(inputValue, 500);
-
-  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    setInputValue(e.target.value);
-  };
-
-  console.log(debouncedValue);
-
+export const Filter: FC<IFilter> = ({ handleInputChange, handleRangeChange }) => {
   return (
     <Flex justify="flex-end" style={{ marginBottom: 10 }} gap={5}>
-      <Input onChange={handleChangeInput} placeholder="Qidiruv" />
-      <RangePicker />
+      <Input onChange={handleInputChange} placeholder="Qidiruv" />
+      <RangePicker onChange={handleRangeChange} />
     </Flex>
   );
 };

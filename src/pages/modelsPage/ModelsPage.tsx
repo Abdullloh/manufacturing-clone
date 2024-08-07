@@ -10,15 +10,19 @@ import {
 } from '../../features/modelTypes/services';
 import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
+import { useFilter } from '../../shared/hooks';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
 
 export const ModelsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const [addModalType] = useCreateModelTypeMutation();
+  const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const [deleteModelType] = useDeleteModelTypeMutation();
-  const { data, isLoading, refetch } = useGetModelTypeListQuery();
-
+  const { data, isLoading, refetch } = useGetModelTypeListQuery(
+    { keyword: debouncedValue, from_date, to_date },
+    { refetchOnMountOrArgChange: true },
+  );
   const handleDeleteModelType = (id: string) => {
     deleteModelType({ id }).then(refetch);
   };
@@ -36,7 +40,7 @@ export const ModelsPage: FC = () => {
         </Button>
       </Flex>
 
-      <Filter />
+      <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />
 
       <ReusableTable<IModelType>
         onEdit={() => {}}

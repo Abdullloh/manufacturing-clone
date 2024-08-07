@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseApi } from '../../../api';
+import { IQuery } from '../../../shared/models';
 import { IProduct } from '../models';
 
 export const productService = createApi({
@@ -27,11 +28,11 @@ export const productService = createApi({
         body: { id },
       }),
     }),
-    getProducts: builder.query<IProduct[], { is_deleted?: boolean }>({
-      query: (data) => ({
+    getProducts: builder.query<IProduct[], IQuery>({
+      query: (body) => ({
         url: '/products/list',
         method: 'POST',
-        body: data,
+        body,
       }),
     }),
   }),

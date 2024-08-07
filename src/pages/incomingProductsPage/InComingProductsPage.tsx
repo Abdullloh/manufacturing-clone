@@ -10,6 +10,7 @@ import {
 } from '../../features/products/services';
 import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
+import { useFilter } from '../../shared/hooks';
 import { useModal } from '../../shared/hooks/useModal';
 
 const { Title } = Typography;
@@ -18,8 +19,12 @@ const { RangePicker } = DatePicker;
 export const IncomingProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const [addProduct] = useCreateProductMutation();
+  const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const [deletProducs] = useDeleteProductMutation();
-  const { data, isLoading, refetch } = useGetProductsQuery({}, { refetchOnMountOrArgChange: true });
+  const { data, isLoading, refetch } = useGetProductsQuery(
+    { keyword: debouncedValue, from_date, to_date },
+    { refetchOnMountOrArgChange: true },
+  );
   const [qrCodeOpen, setQrCodeOpen] = useState<boolean>(false);
 
   const [id, setId] = useState<string>('');
@@ -50,7 +55,7 @@ export const IncomingProductsPage: FC = () => {
         </Button>
       </Flex>
 
-      <Filter />
+      <Filter handleRangeChange={handleRangeChange} handleInputChange={handleChangeInput} />
 
       <ReusableTable
         onDelete={handleDeleteProduct}

@@ -10,15 +10,19 @@ import {
 } from '../../features/dimensions/services';
 import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
+import { useFilter } from '../../shared/hooks';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
 
 export const DimensionsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const [addDimension] = useCreateDimensionMutation();
+  const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const [deleteDimension] = useDeleteDimensionMutation();
-  const { data, isLoading, refetch } = useGetValumeTypeListQuery();
-
+  const { data, isLoading, refetch } = useGetValumeTypeListQuery(
+    { keyword: debouncedValue, from_date, to_date },
+    { refetchOnMountOrArgChange: true },
+  );
   const handleDeleteDimension = (id: string) => {
     deleteDimension({ id }).then(refetch);
   };
@@ -37,7 +41,7 @@ export const DimensionsPage: FC = () => {
           Qo'shish
         </Button>
       </Flex>
-      <Filter />
+      <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />
       <ReusableTable<IDimension>
         onEdit={() => {}}
         onDelete={handleDeleteDimension}

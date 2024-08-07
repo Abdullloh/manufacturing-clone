@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseApi } from '../../../api';
+import { IQuery } from '../../../shared/models';
 import { IModelType } from '../models';
 
 export const modelApi = createApi({
@@ -27,9 +28,10 @@ export const modelApi = createApi({
         body: { model_name },
       }),
     }),
-    getModelTypeList: builder.query<IModelType[], void>({
-      query: () => ({
+    getModelTypeList: builder.query<IModelType[], IQuery>({
+      query: (body) => ({
         url: '/model-type/list',
+        body,
       }),
     }),
   }),

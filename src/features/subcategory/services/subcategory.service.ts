@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseApi } from '../../../api';
+import { IQuery } from '../../../shared/models';
 import { ISubcategory, ISubcategoryItem } from '../models';
 
 export const subCategoryApi = createApi({
@@ -27,8 +28,11 @@ export const subCategoryApi = createApi({
         body: { sub_category_name, category_id },
       }),
     }),
-    getSubCategoryList: builder.query<ISubcategory[], void>({
-      query: () => '/sub-category/list',
+    getSubCategoryList: builder.query<ISubcategory[], IQuery>({
+      query: (body) => ({
+        url: '/sub-category/list',
+        body,
+      }),
     }),
     getSubCategoryItem: builder.mutation<ISubcategoryItem, { id: string }>({
       query: ({ id }) => ({

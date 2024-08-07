@@ -10,13 +10,18 @@ import {
 } from '../../features/subcategory/services';
 import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
+import { useFilter } from '../../shared/hooks';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
 
 export const SubCategoryPage: FC = () => {
   const [addSubCategory] = useCreateSubCategoryMutation();
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
-  const { data, refetch, isLoading } = useGetSubCategoryListQuery();
+  const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
+  const { data, refetch, isLoading } = useGetSubCategoryListQuery(
+    { keyword: debouncedValue, from_date, to_date },
+    { refetchOnMountOrArgChange: true },
+  );
   const [deleteSubCategory] = useDeleteSubCategoryMutation();
 
   const handleDeleteSubCategory = (id: string) => {
@@ -37,7 +42,7 @@ export const SubCategoryPage: FC = () => {
         </Button>
       </Flex>
 
-      <Filter />
+      <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />
 
       <ReusableTable<ISubcategory>
         onEdit={() => {}}
