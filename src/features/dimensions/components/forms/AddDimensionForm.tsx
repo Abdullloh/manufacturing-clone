@@ -9,11 +9,12 @@ import {
 
 interface IAddDimensionsForm {
   onSubmit: (values: any) => void;
+  defaultValues: any;
 }
 
-export const AddDimensionForm: FC<IAddDimensionsForm> = ({ onSubmit }) => {
+export const AddDimensionForm: FC<IAddDimensionsForm> = ({ onSubmit, defaultValues }) => {
   const { control, handleSubmit } = useForm<any>({
-    defaultValues: {},
+    defaultValues,
   });
 
   const categoryId = useWatch({ control, name: 'category_id' });

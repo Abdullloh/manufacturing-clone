@@ -1,12 +1,12 @@
 import { ChangeEvent, useState } from 'react';
 import useDebounce from './useDebaunce';
 
-export const useFilter = () => {
+export const useFilter = (delay: number = 1000) => {
   const [inputValue, setInputValue] = useState<string>('');
   const [date, setDate] = useState<string[]>([]);
-  const debouncedValue = useDebounce(inputValue, 1500);
+  const debouncedValue = useDebounce(inputValue, delay);
 
-  const debounceDateRange = useDebounce(date, 1500);
+  const debounceDateRange = useDebounce(date, delay);
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };

@@ -29,7 +29,7 @@ export const AddProductForm: FC<IAddProductForm> = ({ onSubmit }) => {
       <InputController control={control} name="color" label="Rangi" />
       <InputController control={control} name="code" label="Kodi" />
       <Flex gap={5}>
-        <InputController style={{ flex: '1' }} control={control} name="price" label="Narxi" />
+        <InputController control={control} name="price" label="Narxi" />
         <SelectController
           control={control}
           name="currency_type"

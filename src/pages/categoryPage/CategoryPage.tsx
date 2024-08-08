@@ -1,5 +1,6 @@
 import { Button, Flex, Typography } from 'antd';
 import { FC, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { CATEGORY_COLUMNS } from '../../features/category/columns';
 import { CategoryAddModal } from '../../features/category/components/modals';
 import { ICategoryResponse } from '../../features/category/models';
@@ -7,6 +8,7 @@ import {
   useCreateCategoryMutation,
   useDeleteCategoryMutation,
   useGetCategoryListQuery,
+  useUpdateCategoryMutation,
 } from '../../features/category/services/category.service';
 import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
@@ -15,6 +17,7 @@ const { Title } = Typography;
 
 export const CategoryPage: FC = () => {
   const [addCategory] = useCreateCategoryMutation();
+  const [updateCategory] = useUpdateCategoryMutation();
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const { data, isLoading, refetch } = useGetCategoryListQuery(
@@ -26,7 +29,11 @@ export const CategoryPage: FC = () => {
   const [id, setId] = useState<string>('');
 
   const handleCreateCategory = (values: any) => {
-    addCategory(values).then(handleCloseModal).then(refetch);
+    if (!id) return addCategory(values).then(handleCloseModal).then(refetch);
+    updateCategory({ ...values, id })
+      .then(() => setId(''))
+      .then(handleCloseModal)
+      .then(refetch);
   };
 
   const handleDeleteCategory = (id: string) => {
@@ -36,6 +43,11 @@ export const CategoryPage: FC = () => {
   const handleEditCategory = (id: string) => {
     setId(id);
     handleOpenModal();
+  };
+
+  const handleCancelModal = () => {
+    setId('');
+    handleCloseModal();
   };
 
   return (
@@ -54,15 +66,18 @@ export const CategoryPage: FC = () => {
         dataSource={data}
         columns={CATEGORY_COLUMNS}
       />
-
-      <CategoryAddModal
-        id={id}
-        open={isModalOpen}
-        title="Kategoriya qo'shish"
-        onSubmit={handleCreateCategory}
-        onOk={handleCreateCategory}
-        onCancel={handleCloseModal}
-      />
+      {isModalOpen &&
+        createPortal(
+          <CategoryAddModal
+            id={id}
+            open={isModalOpen}
+            title="Kategoriya qo'shish"
+            onSubmit={handleCreateCategory}
+            onOk={handleCreateCategory}
+            onCancel={handleCancelModal}
+          />,
+          document.body,
+        )}
     </Flex>
   );
 };

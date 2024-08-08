@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormComponent, InputController } from '../../../../shared/components';
 
@@ -8,14 +8,11 @@ interface ICategoryCreateForm {
   defaultValues: any;
 }
 
-export const CategoryCreateForm: FC<ICategoryCreateForm> = ({ onSubmit, defaultValues = {} }) => {
-  const { control, handleSubmit, reset } = useForm<any>({
+export const CategoryCreateForm: FC<ICategoryCreateForm> = ({ onSubmit, defaultValues }) => {
+  const { control, handleSubmit } = useForm<any>({
     defaultValues,
+    shouldUnregister: true,
   });
-
-  useEffect(() => {
-    reset(defaultValues);
-  }, [reset]);
 
   return (
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">

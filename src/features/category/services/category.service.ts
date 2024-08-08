@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseApi } from '../../../api';
 import { IQuery } from '../../../shared/models';
-import { ICategoryResponse, ICategoryResponseItem } from '../models';
+import { ICategory, ICategoryResponse, ICategoryResponseItem } from '../models';
 
 export const categoryApi = createApi({
   reducerPath: 'categoryApi',
   baseQuery: baseApi,
   endpoints: (builder) => ({
-    createCategory: builder.mutation<any, { category_name: string }>({
+    createCategory: builder.mutation<any, ICategory>({
       query: ({ category_name }) => ({
         url: '/category/create',
         method: 'POST',
@@ -35,11 +35,11 @@ export const categoryApi = createApi({
         method: 'POST',
       }),
     }),
-    updateCategory: builder.mutation<ICategoryResponseItem, { id: string }>({
-      query: ({ id }) => ({
+    updateCategory: builder.mutation<ICategoryResponseItem, ICategory>({
+      query: (body) => ({
         url: '/category/update',
-        body: { id },
         method: 'POST',
+        body,
       }),
     }),
   }),

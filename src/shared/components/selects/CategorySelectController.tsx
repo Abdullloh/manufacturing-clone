@@ -12,7 +12,8 @@ interface ICategorySelect {
 export const CategorySelectController: FC<ICategorySelect> = ({ name, control }) => {
   const { data } = useGetCategoryListQuery({});
 
-  const options: IOption[] = data?.map(({ name: label, id: value }) => ({ label, value })) || [];
+  const options: IOption[] =
+    data?.map(({ category_name: label, id: value }) => ({ label, value })) || [];
 
   return (
     <SelectController label="Kategoriya tanlash" options={options} control={control} name={name} />

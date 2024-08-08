@@ -1,23 +1,25 @@
-import { Form, FormItemProps, Input } from 'antd';
+import { Form, Input } from 'antd';
 import { FC } from 'react';
 import { Control, Controller } from 'react-hook-form';
 
-interface IInputController extends FormItemProps {
+interface IInputController {
   name: string;
-  label: string;
   control: Control<any, any>;
+  label?: string;
 }
 
-export const InputController: FC<IInputController> = ({ name, control, label, ...props }) => {
+export const InputController: FC<IInputController> = ({ name, control, label }) => {
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => (
-        <Form.Item name={name} label={label} {...props}>
-          <Input {...field} />
-        </Form.Item>
-      )}
-    />
+    <Form.Item label={label}>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => {
+          console.log(field);
+
+          return <Input {...field} />;
+        }}
+      />
+    </Form.Item>
   );
 };

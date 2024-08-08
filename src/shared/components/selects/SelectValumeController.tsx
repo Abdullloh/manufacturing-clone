@@ -16,7 +16,7 @@ export const SelectValumeController: FC<ISelectValumeController> = ({ name, cont
   const [data, setData] = useState<ISubcategoryItem>();
 
   const options: IOption[] =
-    data?.valume_types.map(({ name: label, id: value }) => ({ label, value })) || [];
+    data?.valume_types.map(({ valume_type_name: label, id: value }) => ({ label, value })) || [];
 
   useEffect(() => {
     if (id) {

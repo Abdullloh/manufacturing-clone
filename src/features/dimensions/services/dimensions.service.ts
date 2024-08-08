@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseApi } from '../../../api';
 import { IQuery } from '../../../shared/models';
-import { IDimension } from '../models';
+import { IDimension, IDimensionItem } from '../models';
 
 export const dimensionsApi = createApi({
   reducerPath: 'dimensionsApi',
@@ -21,16 +21,23 @@ export const dimensionsApi = createApi({
         body: { id },
       }),
     }),
-    updateDimension: builder.mutation<any, { valume_type_name: string }>({
-      query: ({ valume_type_name }) => ({
+    updateDimension: builder.mutation<any, IDimension>({
+      query: (body) => ({
         url: '/valume-type/update',
         method: 'POST',
-        body: { valume_type_name },
+        body,
       }),
     }),
     getValumeTypeList: builder.query<IDimension[], IQuery>({
       query: (body) => ({
         url: '/valume-type/list',
+        method: 'POST',
+        body,
+      }),
+    }),
+    getValumeTypeItem: builder.mutation<IDimensionItem, { id: string }>({
+      query: (body) => ({
+        url: '/valume-type/get-one',
         method: 'POST',
         body,
       }),
@@ -41,6 +48,7 @@ export const dimensionsApi = createApi({
 export const {
   useCreateDimensionMutation,
   useGetValumeTypeListQuery,
+  useGetValumeTypeItemMutation,
   useDeleteDimensionMutation,
   useUpdateDimensionMutation,
 } = dimensionsApi;

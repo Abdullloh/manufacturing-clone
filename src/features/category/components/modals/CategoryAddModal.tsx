@@ -1,4 +1,4 @@
-import { ModalProps } from 'antd';
+import { Flex, ModalProps, Spin } from 'antd';
 import { FC, useEffect, useState } from 'react';
 import { ModalBase } from '../../../../shared/components/modal';
 import { useGetCategoryItemMutation } from '../../services';
@@ -10,16 +10,24 @@ interface ICategorAddModal extends ModalProps {
 }
 
 export const CategoryAddModal: FC<ICategorAddModal> = ({ onSubmit, id, ...props }) => {
-  const [getCategory] = useGetCategoryItemMutation();
+  const [getCategory, { isLoading }] = useGetCategoryItemMutation();
   const [values, setValues] = useState<any>();
-  console.log(values);
 
   useEffect(() => {
-    getCategory({ id }).then((res) => setValues({ category_name: res.data?.category_name }));
+    if (id) {
+      getCategory({ id }).then((res) => setValues(res.data));
+    }
   }, [id, getCategory]);
+
   return (
     <ModalBase {...props} footer={null}>
-      <CategoryCreateForm defaultValues={values} onSubmit={onSubmit} />
+      {isLoading ? (
+        <Flex align="center" justify="center">
+          <Spin />
+        </Flex>
+      ) : (
+        <CategoryCreateForm defaultValues={values} onSubmit={onSubmit} />
+      )}
     </ModalBase>
   );
 };

@@ -1,5 +1,6 @@
 import { Button, Flex, Typography } from 'antd';
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { DIMENSIONS_COLUMNS } from '../../features/dimensions/columns';
 import { AddDimensionModal } from '../../features/dimensions/components/modals';
 import { IDimension } from '../../features/dimensions/models';
@@ -7,6 +8,7 @@ import {
   useCreateDimensionMutation,
   useDeleteDimensionMutation,
   useGetValumeTypeListQuery,
+  useUpdateDimensionMutation,
 } from '../../features/dimensions/services';
 import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
@@ -17,8 +19,10 @@ const { Title } = Typography;
 export const DimensionsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const [addDimension] = useCreateDimensionMutation();
+  const [updateDimension] = useUpdateDimensionMutation();
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const [deleteDimension] = useDeleteDimensionMutation();
+  const [id, setId] = useState<string>('');
   const { data, isLoading, refetch } = useGetValumeTypeListQuery(
     Object.assign({ keyword: debouncedValue }, from_date && to_date ? { from_date, to_date } : {}),
 
@@ -29,9 +33,20 @@ export const DimensionsPage: FC = () => {
   };
 
   const handleCreateCategory = (values: any) => {
-    console.log(values);
+    if (!id) return addDimension(values).then(handleCloseModal).then(refetch);
+    updateDimension({ ...values, id })
+      .then(() => setId(''))
+      .then(handleCloseModal)
+      .then(refetch);
+  };
 
-    addDimension(values).then(handleCloseModal).then(refetch);
+  const handleEditCategory = (id: string) => {
+    setId(id);
+    handleOpenModal();
+  };
+  const handleCancelModal = () => {
+    setId('');
+    handleCloseModal();
   };
 
   return (
@@ -44,20 +59,24 @@ export const DimensionsPage: FC = () => {
       </Flex>
       <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />
       <ReusableTable<IDimension>
-        onEdit={() => {}}
+        onEdit={handleEditCategory}
         onDelete={handleDeleteDimension}
         loading={isLoading}
         dataSource={data}
         columns={DIMENSIONS_COLUMNS}
       />
 
-      <AddDimensionModal
-        open={isModalOpen}
-        title="O'LCHOV BIRLIGI QO'SHISH"
-        onSubmit={handleCreateCategory}
-        onOk={() => {}}
-        onCancel={handleCloseModal}
-      />
+      {isModalOpen &&
+        createPortal(
+          <AddDimensionModal
+            open={isModalOpen}
+            id={id}
+            title="O'LCHOV BIRLIGI QO'SHISH"
+            onSubmit={handleCreateCategory}
+            onCancel={handleCancelModal}
+          />,
+          document.body,
+        )}
     </Flex>
   );
 };
