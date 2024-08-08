@@ -6,7 +6,7 @@ export const CATEGORY_COLUMNS: TableProps<ICategoryResponse>['columns'] = [
   {
     title: 'Kategoriya nomi',
     key: 'name',
-    dataIndex: 'name',
+    dataIndex: 'category_name',
   },
   {
     title: 'Yaratilgan vaqtI',

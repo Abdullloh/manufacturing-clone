@@ -9,13 +9,13 @@ interface ICategoryCreateForm {
 }
 
 export const CategoryCreateForm: FC<ICategoryCreateForm> = ({ onSubmit, defaultValues = {} }) => {
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset } = useForm<any>({
     defaultValues,
   });
 
   useEffect(() => {
     reset(defaultValues);
-  }, [reset, defaultValues]);
+  }, [reset]);
 
   return (
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">

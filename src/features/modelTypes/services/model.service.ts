@@ -31,6 +31,7 @@ export const modelApi = createApi({
     getModelTypeList: builder.query<IModelType[], IQuery>({
       query: (body) => ({
         url: '/model-type/list',
+        method: 'POST',
         body,
       }),
     }),

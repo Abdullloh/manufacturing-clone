@@ -5,8 +5,8 @@ import { IModelType } from '../models';
 export const MODEL_TYPES_COLUMNS: TableProps<IModelType>['columns'] = [
   {
     title: 'Model nomi',
-    key: 'name',
-    dataIndex: 'name',
+    key: 'model_name',
+    dataIndex: 'model_name',
   },
   {
     title: 'Yaratilgan vaqtI',

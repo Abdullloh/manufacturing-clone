@@ -1,9 +1,9 @@
 import { IDimension } from '../../dimensions/models';
 
 export interface ISubcategory {
-  name: string;
+  sub_category_name: string;
   id: string;
-  is_deleted: boolean;
+  category_name: string;
   created_at: string;
 }
 

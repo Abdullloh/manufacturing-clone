@@ -20,7 +20,7 @@ export const SubCategorySelectController: FC<ISubCategorySelectController> = ({
   const [data, setData] = useState<ICategoryResponseItem>();
 
   const options: IOption[] = data?.sub_categories?.map((item) => ({
-    label: item?.name,
+    label: item?.sub_category_name,
     value: item?.id,
   })) || [{ label: 'No data', value: '0' }];
 

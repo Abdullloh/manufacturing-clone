@@ -9,8 +9,6 @@ export interface ICategoryResponse {
 
 export interface ICategoryResponseItem {
   id: string;
-  name: string;
-  is_deleted: boolean;
-  created_at: string;
+  category_name: string;
   sub_categories: ISubcategory[];
 }
