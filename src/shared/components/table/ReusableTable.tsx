@@ -1,15 +1,19 @@
-import { DeleteFilled, EditFilled } from '@ant-design/icons';
+import { DeleteFilled, EditFilled, QrcodeOutlined } from '@ant-design/icons';
 import { Button, Flex, Table, TableColumnsType, TableProps } from 'antd';
 
 interface IReusableTable<T> extends TableProps<T> {
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
+  showScannerIcon?: boolean;
+  onScanShow?: (id: string) => void;
 }
 
 export const ReusableTable = <T extends {}>({
   onDelete,
   onEdit,
+  onScanShow = () => {},
   columns,
+  showScannerIcon = false,
   ...props
 }: IReusableTable<T>) => {
   const extendedColumns: TableColumnsType<T> = [
@@ -25,6 +29,11 @@ export const ReusableTable = <T extends {}>({
           <Button onClick={() => onDelete(record.id)}>
             <DeleteFilled />
           </Button>
+          {showScannerIcon && (
+            <Button onClick={() => onScanShow(record.id)}>
+              <QrcodeOutlined />
+            </Button>
+          )}
         </Flex>
       ),
     },

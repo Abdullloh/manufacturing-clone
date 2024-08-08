@@ -6,11 +6,12 @@ import { CategorySelectController } from '../../../../shared/components/selects'
 
 interface ISubCategoryCreateForm {
   onSubmit: (values: any) => void;
+  defaultValues: any;
 }
 
-export const SubCategoryCreateForm: FC<ISubCategoryCreateForm> = ({ onSubmit }) => {
+export const SubCategoryCreateForm: FC<ISubCategoryCreateForm> = ({ onSubmit, defaultValues }) => {
   const { control, handleSubmit } = useForm({
-    defaultValues: {},
+    defaultValues,
   });
 
   return (

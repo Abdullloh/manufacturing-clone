@@ -5,11 +5,12 @@ import { FormComponent, InputController } from '../../../../shared/components';
 
 interface IAddModalTypeForm {
   onSubmit: (values: any) => void;
+  defaultValues: any;
 }
 
-export const AddModelTypeForm: FC<IAddModalTypeForm> = ({ onSubmit }) => {
+export const AddModelTypeForm: FC<IAddModalTypeForm> = ({ onSubmit, defaultValues }) => {
   const { control, handleSubmit } = useForm({
-    defaultValues: {},
+    defaultValues,
   });
 
   return (

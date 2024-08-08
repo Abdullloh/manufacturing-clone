@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseApi } from '../../../api';
 import { IQuery } from '../../../shared/models';
-import { IModelType } from '../models';
+import { IModelType, IModelTypeItem } from '../models';
 
 export const modelApi = createApi({
   reducerPath: 'modelApi',
@@ -21,16 +21,23 @@ export const modelApi = createApi({
         body: { id },
       }),
     }),
-    updateModelType: builder.mutation<any, { model_name: string }>({
-      query: ({ model_name }) => ({
+    updateModelType: builder.mutation<any, { model_name: string; id: string }>({
+      query: (body) => ({
         url: '/model-type/update',
         method: 'POST',
-        body: { model_name },
+        body,
       }),
     }),
     getModelTypeList: builder.query<IModelType[], IQuery>({
       query: (body) => ({
         url: '/model-type/list',
+        method: 'POST',
+        body,
+      }),
+    }),
+    getModelTypeItem: builder.mutation<IModelTypeItem, { id: string }>({
+      query: (body) => ({
+        url: '/model-type/get-one',
         method: 'POST',
         body,
       }),
@@ -42,5 +49,6 @@ export const {
   useCreateModelTypeMutation,
   useGetModelTypeListQuery,
   useDeleteModelTypeMutation,
+  useGetModelTypeItemMutation,
   useUpdateModelTypeMutation,
 } = modelApi;

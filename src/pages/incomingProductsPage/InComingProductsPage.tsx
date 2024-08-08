@@ -1,4 +1,4 @@
-import { Button, DatePicker, Flex, Typography } from 'antd';
+import { Button, Flex, Typography } from 'antd';
 import { FC, useState } from 'react';
 import { PRODUCT_COLUMNS } from '../../features/products/columns';
 import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
@@ -14,7 +14,6 @@ import { useFilter } from '../../shared/hooks';
 import { useModal } from '../../shared/hooks/useModal';
 
 const { Title } = Typography;
-const { RangePicker } = DatePicker;
 
 export const IncomingProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
@@ -42,6 +41,15 @@ export const IncomingProductsPage: FC = () => {
     });
   };
 
+  const handleEditCategory = (id: string) => {
+    setId(id);
+    handleOpenModal();
+  };
+
+  const handleOpenQrEdit = (id: string) => {
+    setId(id);
+    setQrCodeOpen(true);
+  };
   const handlePrintQrCode = () => {
     window.print();
     setQrCodeOpen(false);
@@ -60,20 +68,27 @@ export const IncomingProductsPage: FC = () => {
 
       <ReusableTable
         onDelete={handleDeleteProduct}
-        onEdit={() => {}}
+        onEdit={handleEditCategory}
+        onScanShow={handleOpenQrEdit}
         loading={isLoading}
         dataSource={data}
         columns={PRODUCT_COLUMNS}
+        showScannerIcon
       />
 
-      <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />
-      <AddProductModal
-        open={isModalOpen}
-        title="Mahsulot qo'shish"
-        onSubmit={handleAddProduct}
-        onOk={() => {}}
-        onCancel={handleCloseModal}
-      />
+      {qrCodeOpen && (
+        <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />
+      )}
+      {isModalOpen && (
+        <AddProductModal
+          id={id}
+          open={isModalOpen}
+          title="Mahsulot qo'shish"
+          onSubmit={handleAddProduct}
+          onOk={() => {}}
+          onCancel={handleCloseModal}
+        />
+      )}
     </Flex>
   );
 };

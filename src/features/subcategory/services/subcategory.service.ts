@@ -21,11 +21,14 @@ export const subCategoryApi = createApi({
         body: { id },
       }),
     }),
-    updateSubCategory: builder.mutation<any, { sub_category_name: string; category_id: string }>({
-      query: ({ sub_category_name, category_id }) => ({
+    updateSubCategory: builder.mutation<
+      any,
+      { sub_category_name: string; category_id: string; id: string }
+    >({
+      query: ({ sub_category_name, category_id, id }) => ({
         url: '/sub-category/update',
         method: 'POST',
-        body: { sub_category_name, category_id },
+        body: { sub_category_name, category_id, id },
       }),
     }),
     getSubCategoryList: builder.query<ISubcategory[], IQuery>({

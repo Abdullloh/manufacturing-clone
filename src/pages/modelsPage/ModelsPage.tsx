@@ -1,5 +1,5 @@
 import { Button, Flex, Typography } from 'antd';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { MODEL_TYPES_COLUMNS } from '../../features/modelTypes/columns';
 import { AddModalTypeModal } from '../../features/modelTypes/components/modals';
 import { IModelType } from '../../features/modelTypes/models';
@@ -7,6 +7,7 @@ import {
   useCreateModelTypeMutation,
   useDeleteModelTypeMutation,
   useGetModelTypeListQuery,
+  useUpdateModelTypeMutation,
 } from '../../features/modelTypes/services';
 import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
@@ -16,9 +17,11 @@ const { Title } = Typography;
 
 export const ModelsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
-  const [addModalType] = useCreateModelTypeMutation();
+  const [addModelType] = useCreateModelTypeMutation();
+  const [updateModelType] = useUpdateModelTypeMutation();
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const [deleteModelType] = useDeleteModelTypeMutation();
+  const [id, setId] = useState<string>('');
   const { data, isLoading, refetch } = useGetModelTypeListQuery(
     Object.assign({ keyword: debouncedValue }, from_date && to_date ? { from_date, to_date } : {}),
     { refetchOnMountOrArgChange: true },
@@ -28,7 +31,22 @@ export const ModelsPage: FC = () => {
   };
 
   const handleAddModelType = (values: any) => {
-    addModalType({ model_name: values.model_name }).then(handleCloseModal).then(refetch);
+    if (!id)
+      return addModelType({ model_name: values.model_name }).then(handleCloseModal).then(refetch);
+    updateModelType({ ...values, id })
+      .then(() => setId(''))
+      .then(handleCloseModal)
+      .then(refetch);
+  };
+
+  const handleEditCategory = (id: string) => {
+    setId(id);
+    handleOpenModal();
+  };
+
+  const handleCancelModal = () => {
+    setId('');
+    handleCloseModal();
   };
 
   return (
@@ -43,20 +61,21 @@ export const ModelsPage: FC = () => {
       <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />
 
       <ReusableTable<IModelType>
-        onEdit={() => {}}
+        onEdit={handleEditCategory}
         onDelete={handleDeleteModelType}
         loading={isLoading}
         dataSource={data}
         columns={MODEL_TYPES_COLUMNS}
       />
-
-      <AddModalTypeModal
-        open={isModalOpen}
-        title="Model turi qo'shish"
-        onSubmit={handleAddModelType}
-        onOk={() => {}}
-        onCancel={handleCloseModal}
-      />
+      {isModalOpen && (
+        <AddModalTypeModal
+          id={id}
+          open={isModalOpen}
+          title="Model turi qo'shish"
+          onSubmit={handleAddModelType}
+          onCancel={handleCancelModal}
+        />
+      )}
     </Flex>
   );
 };

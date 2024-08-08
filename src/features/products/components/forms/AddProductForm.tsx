@@ -8,12 +8,15 @@ import {
   SelectValumeController,
   SubCategorySelectController,
 } from '../../../../shared/components/selects';
+
 interface IAddProductForm {
   onSubmit: (values: any) => void;
+  defaultValues: any;
 }
-export const AddProductForm: FC<IAddProductForm> = ({ onSubmit }) => {
+
+export const AddProductForm: FC<IAddProductForm> = ({ onSubmit, defaultValues }) => {
   const { control, handleSubmit } = useForm<any>({
-    defaultValues: {},
+    defaultValues,
   });
 
   const categoryId = useWatch({ control, name: 'category_id' });

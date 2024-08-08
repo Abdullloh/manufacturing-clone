@@ -35,12 +35,20 @@ export const productService = createApi({
         body,
       }),
     }),
+    getProductItem: builder.mutation<IProduct[], { id: string }>({
+      query: (body) => ({
+        url: '/products/get-one',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
 export const {
   useCreateProductMutation,
   useDeleteProductMutation,
+  useGetProductItemMutation,
   useGetProductsQuery,
   useDecrementProductMutation,
 } = productService;
