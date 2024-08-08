@@ -15,8 +15,6 @@ export const InputController: FC<IInputController> = ({ name, control, label }) 
         name={name}
         control={control}
         render={({ field }) => {
-          console.log(field);
-
           return <Input {...field} />;
         }}
       />

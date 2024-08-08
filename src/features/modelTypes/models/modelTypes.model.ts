@@ -1,6 +1,6 @@
 export interface IModelType {
   id: string;
-  name: string;
+  model_name: string;
   is_deleted: boolean;
 }
 

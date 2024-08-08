@@ -12,7 +12,8 @@ interface ISelectModelTypeController {
 export const SelectModelTypeController: FC<ISelectModelTypeController> = ({ name, control }) => {
   const { data } = useGetModelTypeListQuery({});
 
-  const options: IOption[] = data?.map(({ name: label, id: value }) => ({ label, value })) || [];
+  const options: IOption[] =
+    data?.map(({ model_name: label, id: value }) => ({ label, value })) || [];
 
   return (
     <SelectController
