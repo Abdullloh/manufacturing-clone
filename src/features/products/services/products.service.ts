@@ -35,6 +35,13 @@ export const productService = createApi({
         body,
       }),
     }),
+    getExitedProducts: builder.query<{ total: number; data: IProduct[] }, IQuery>({
+      query: (body) => ({
+        url: '/out-product/list',
+        method: 'POST',
+        body,
+      }),
+    }),
     getProductItem: builder.mutation<IProduct[], { id: string }>({
       query: (body) => ({
         url: '/products/get-one',
@@ -56,6 +63,7 @@ export const {
   useCreateProductMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
+  useGetExitedProductsQuery,
   useGetProductItemMutation,
   useGetProductsQuery,
   useDecrementProductMutation,
