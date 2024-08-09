@@ -35,11 +35,11 @@ export const EXITED_PRODUCT_COLUMNS: TableProps<IProduct>['columns'] = [
     dataIndex: 'currency_type',
     render: (value) => (value === '0' ? 'Sum' : 'Dollar'),
   },
-  {
-    title: 'Soni',
-    key: 'value',
-    dataIndex: 'value',
-  },
+  //   {
+  //     title: 'Soni',
+  //     key: 'value',
+  //     dataIndex: 'value',
+  //   },
   {
     title: 'Model',
     key: 'model_name',
