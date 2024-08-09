@@ -2,7 +2,7 @@ import { TableProps } from 'antd';
 import { formatDateClient } from '../../../shared/utils';
 import { IProduct } from '../models';
 
-export const PRODUCT_COLUMNS: TableProps<IProduct>['columns'] = [
+export const EXITED_PRODUCT_COLUMNS: TableProps<IProduct>['columns'] = [
   {
     title: 'Kategoriya',
     key: 'category_name',

@@ -1,6 +1,6 @@
 import { Flex, Table, Typography } from 'antd';
 import { FC, useState } from 'react';
-import { PRODUCT_COLUMNS } from '../../features/products/columns';
+import { EXITED_PRODUCT_COLUMNS } from '../../features/products/columns/exited-product.columns';
 import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
 import { IProduct } from '../../features/products/models';
 import {
@@ -47,7 +47,7 @@ export const ExitedProductsPage: FC = () => {
         <Title level={2}>MAXSULOTLAR RO'YXATI </Title>
       </Flex>
       <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />
-      <Table loading={isLoading} dataSource={data?.data} columns={PRODUCT_COLUMNS} />
+      <Table loading={isLoading} dataSource={data?.data} columns={EXITED_PRODUCT_COLUMNS} />
 
       <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />
       <AddProductModal
