@@ -62,7 +62,7 @@ export const DimensionsPage: FC = () => {
         onEdit={handleEditCategory}
         onDelete={handleDeleteDimension}
         loading={isLoading}
-        dataSource={data}
+        dataSource={data?.data}
         columns={DIMENSIONS_COLUMNS}
       />
 

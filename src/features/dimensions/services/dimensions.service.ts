@@ -28,7 +28,7 @@ export const dimensionsApi = createApi({
         body,
       }),
     }),
-    getValumeTypeList: builder.query<IDimension[], IQuery>({
+    getValumeTypeList: builder.query<{ total: number; data: IDimension[] }, IQuery>({
       query: (body) => ({
         url: '/valume-type/list',
         method: 'POST',

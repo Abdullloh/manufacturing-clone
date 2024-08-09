@@ -14,7 +14,7 @@ export const categoryApi = createApi({
         body: { category_name },
       }),
     }),
-    getCategoryList: builder.query<ICategoryResponse[], IQuery>({
+    getCategoryList: builder.query<{ total: number; data: ICategoryResponse[] }, IQuery>({
       query: (body) => ({
         url: '/category/list',
         method: 'POST',

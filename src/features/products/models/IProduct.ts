@@ -6,6 +6,7 @@ export interface IProduct {
   value: number;
   color: string;
   code: string;
+  id?: string;
   price: number;
   currency_type: string;
   model_id: string;

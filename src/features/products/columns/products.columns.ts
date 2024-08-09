@@ -3,11 +3,6 @@ import { IProduct } from '../models';
 
 export const PRODUCT_COLUMNS: TableProps<IProduct>['columns'] = [
   {
-    title: 'Mahsulot nomi',
-    key: 'name',
-    dataIndex: 'product_name',
-  },
-  {
     title: 'Kategoriya',
     key: 'category_name',
     dataIndex: 'category_name',

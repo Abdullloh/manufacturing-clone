@@ -65,7 +65,7 @@ export const SubCategoryPage: FC = () => {
         onEdit={handleEditCategory}
         onDelete={handleDeleteSubCategory}
         loading={isLoading}
-        dataSource={data}
+        dataSource={data?.data}
         columns={SUB_CATEGORY_COLUMNS}
       />
 

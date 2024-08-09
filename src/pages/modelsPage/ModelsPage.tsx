@@ -64,7 +64,7 @@ export const ModelsPage: FC = () => {
         onEdit={handleEditCategory}
         onDelete={handleDeleteModelType}
         loading={isLoading}
-        dataSource={data}
+        dataSource={data?.data}
         columns={MODEL_TYPES_COLUMNS}
       />
       {isModalOpen && (

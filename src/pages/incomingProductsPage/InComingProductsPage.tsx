@@ -7,6 +7,7 @@ import {
   useCreateProductMutation,
   useDeleteProductMutation,
   useGetProductsQuery,
+  useUpdateProductMutation,
 } from '../../features/products/services';
 import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
@@ -18,6 +19,7 @@ const { Title } = Typography;
 export const IncomingProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const [addProduct] = useCreateProductMutation();
+  const [updateProduct] = useUpdateProductMutation();
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const [deletProducs] = useDeleteProductMutation();
   const { data, isLoading, refetch } = useGetProductsQuery(
@@ -34,11 +36,21 @@ export const IncomingProductsPage: FC = () => {
   };
 
   const handleAddProduct = (values: IProduct) => {
-    addProduct(values).then(({ data }) => {
-      handleCloseModal();
-      setId(data.id);
-      setQrCodeOpen(true);
-    });
+    if (!id) {
+      addProduct(values).then(({ data }) => {
+        handleCloseModal();
+        setId(data.id);
+        setQrCodeOpen(true);
+      });
+    } else {
+      updateProduct({ ...values, id }).then(({ data }) => {
+        handleCloseModal();
+        if (data) {
+          setId(data?.id);
+        }
+        setQrCodeOpen(true);
+      });
+    }
   };
 
   const handleEditCategory = (id: string) => {
@@ -71,7 +83,7 @@ export const IncomingProductsPage: FC = () => {
         onEdit={handleEditCategory}
         onScanShow={handleOpenQrEdit}
         loading={isLoading}
-        dataSource={data}
+        dataSource={data?.data}
         columns={PRODUCT_COLUMNS}
         showScannerIcon
       />

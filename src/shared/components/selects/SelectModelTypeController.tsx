@@ -13,7 +13,7 @@ export const SelectModelTypeController: FC<ISelectModelTypeController> = ({ name
   const { data } = useGetModelTypeListQuery({});
 
   const options: IOption[] =
-    data?.map(({ model_name: label, id: value }) => ({ label, value })) || [];
+    data?.data?.map(({ model_name: label, id: value }) => ({ label, value })) || [];
 
   return (
     <SelectController

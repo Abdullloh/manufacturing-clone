@@ -63,7 +63,7 @@ export const CategoryPage: FC = () => {
         onDelete={handleDeleteCategory}
         onEdit={handleEditCategory}
         loading={isLoading}
-        dataSource={data}
+        dataSource={data?.data}
         columns={CATEGORY_COLUMNS}
       />
       {isModalOpen &&

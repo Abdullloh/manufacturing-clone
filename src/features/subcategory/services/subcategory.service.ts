@@ -31,7 +31,7 @@ export const subCategoryApi = createApi({
         body: { sub_category_name, category_id, id },
       }),
     }),
-    getSubCategoryList: builder.query<ISubcategory[], IQuery>({
+    getSubCategoryList: builder.query<{ total: number; data: ISubcategory[] }, IQuery>({
       query: (body) => ({
         url: '/sub-category/list',
         method: 'POST',

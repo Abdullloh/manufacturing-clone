@@ -1,4 +1,4 @@
-import { ModalProps } from 'antd';
+import { Flex, ModalProps, Spin } from 'antd';
 import { FC, useEffect, useState } from 'react';
 import { ModalBase } from '../../../../shared/components/modal';
 import { useGetProductItemMutation } from '../../services';
@@ -11,7 +11,7 @@ interface IAddProductModal extends ModalProps {
 
 export const AddProductModal: FC<IAddProductModal> = ({ onSubmit, id, ...props }) => {
   const [values, setValues] = useState<any>();
-  const [getProductItem] = useGetProductItemMutation();
+  const [getProductItem, { isLoading }] = useGetProductItemMutation();
 
   useEffect(() => {
     if (id) {
@@ -21,7 +21,13 @@ export const AddProductModal: FC<IAddProductModal> = ({ onSubmit, id, ...props }
 
   return (
     <ModalBase {...props} footer={null}>
-      <AddProductForm defaultValues={values} onSubmit={onSubmit} />
+      {isLoading ? (
+        <Flex align="center" justify="center">
+          <Spin />
+        </Flex>
+      ) : (
+        <AddProductForm defaultValues={values} onSubmit={onSubmit} />
+      )}
     </ModalBase>
   );
 };

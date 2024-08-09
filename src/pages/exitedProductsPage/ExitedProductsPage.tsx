@@ -44,7 +44,7 @@ export const ExitedProductsPage: FC = () => {
         <Title level={2}>MAXSULOTLAR RO'YXATI </Title>
       </Flex>
       <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />
-      <Table loading={isLoading} dataSource={data} columns={PRODUCT_COLUMNS} />
+      <Table loading={isLoading} dataSource={data?.data} columns={PRODUCT_COLUMNS} />
 
       <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />
       <AddProductModal
