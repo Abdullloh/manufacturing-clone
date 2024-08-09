@@ -1,4 +1,5 @@
 import { TableProps } from 'antd';
+import { formatDateClient } from '../../../shared/utils';
 import { IProduct } from '../models';
 
 export const PRODUCT_COLUMNS: TableProps<IProduct>['columns'] = [
@@ -48,10 +49,11 @@ export const PRODUCT_COLUMNS: TableProps<IProduct>['columns'] = [
     title: 'Kirgan vaqti',
     key: 'created_at',
     dataIndex: 'created_at',
+    render: (value) => formatDateClient(value),
   },
-  {
-    title: 'Chiqib ketish vaqti',
-    key: 'exited_date',
-    dataIndex: 'exited_date',
-  },
+  // {
+  //   title: 'Chiqib ketish vaqti',
+  //   key: 'exited_date',
+  //   dataIndex: 'exited_date',
+  // },
 ];

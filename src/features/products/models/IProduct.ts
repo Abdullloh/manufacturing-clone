@@ -1,5 +1,4 @@
 export interface IProduct {
-  product_name: string;
   category_id: string;
   sub_category_id: string;
   valume_type_id: string;

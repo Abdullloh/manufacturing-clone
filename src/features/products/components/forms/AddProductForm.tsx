@@ -24,7 +24,6 @@ export const AddProductForm: FC<IAddProductForm> = ({ onSubmit, defaultValues })
 
   return (
     <FormComponent onFinish={handleSubmit(onSubmit)} name="categoryCreateForm" layout="vertical">
-      <InputController control={control} name="product_name" label="Mahsulot nomi" />
       <CategorySelectController control={control} name="category_id" />
       <SubCategorySelectController control={control} name="sub_category_id" id={categoryId} />
       <SelectValumeController control={control} name="valume_type_id" id={subCategoryId} />
