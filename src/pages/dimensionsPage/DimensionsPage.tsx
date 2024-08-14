@@ -24,7 +24,10 @@ export const DimensionsPage: FC = () => {
   const [deleteDimension] = useDeleteDimensionMutation();
   const [id, setId] = useState<string>('');
   const { data, isLoading, refetch } = useGetValumeTypeListQuery(
-    Object.assign({ keyword: debouncedValue }, from_date && to_date ? { from_date, to_date } : {}),
+    Object.assign(
+      { keyword: debouncedValue, limit: 10000000 },
+      from_date && to_date ? { from_date, to_date } : {},
+    ),
 
     { refetchOnMountOrArgChange: true },
   );

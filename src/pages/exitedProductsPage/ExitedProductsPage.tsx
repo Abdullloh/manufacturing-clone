@@ -18,7 +18,7 @@ export const ExitedProductsPage: FC = () => {
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const { data, isLoading } = useGetExitedProductsQuery(
     Object.assign(
-      { keyword: debouncedValue, is_deleted: true },
+      { keyword: debouncedValue, is_deleted: true, limit: 10000000 },
       from_date && to_date ? { from_date, to_date } : {},
     ),
 

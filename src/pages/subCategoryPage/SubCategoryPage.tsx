@@ -22,7 +22,10 @@ export const SubCategoryPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const { data, refetch, isLoading } = useGetSubCategoryListQuery(
-    Object.assign({ keyword: debouncedValue }, from_date && to_date ? { from_date, to_date } : {}),
+    Object.assign(
+      { keyword: debouncedValue, limit: 10000000 },
+      from_date && to_date ? { from_date, to_date } : {},
+    ),
     { refetchOnMountOrArgChange: true },
   );
   const [id, setId] = useState<string>('');

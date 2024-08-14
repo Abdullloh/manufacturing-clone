@@ -23,7 +23,10 @@ export const ModelsPage: FC = () => {
   const [deleteModelType] = useDeleteModelTypeMutation();
   const [id, setId] = useState<string>('');
   const { data, isLoading, refetch } = useGetModelTypeListQuery(
-    Object.assign({ keyword: debouncedValue }, from_date && to_date ? { from_date, to_date } : {}),
+    Object.assign(
+      { keyword: debouncedValue, limit: 10000000 },
+      from_date && to_date ? { from_date, to_date } : {},
+    ),
     { refetchOnMountOrArgChange: true },
   );
   const handleDeleteModelType = (id: string) => {

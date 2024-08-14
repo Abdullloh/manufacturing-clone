@@ -5,7 +5,7 @@ import { Sidebar } from '../shared/components';
 import { Header } from '../shared/components/header';
 
 export const LayoutAuthorized: FC = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   const handleShow = () => {
     setShow(!show);

@@ -16,7 +16,7 @@ export const ProductsPage: FC = () => {
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const { data, isLoading } = useGetProductsQuery(
     Object.assign(
-      { keyword: debouncedValue, is_deleted: false },
+      { keyword: debouncedValue, is_deleted: false, limit: 10000000 },
       from_date && to_date ? { from_date, to_date } : {},
     ),
     { refetchOnMountOrArgChange: true },

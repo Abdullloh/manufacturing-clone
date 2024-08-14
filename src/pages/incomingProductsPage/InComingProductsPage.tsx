@@ -23,7 +23,10 @@ export const IncomingProductsPage: FC = () => {
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const [deletProducs] = useDeleteProductMutation();
   const { data, isLoading, refetch } = useGetProductsQuery(
-    Object.assign({ keyword: debouncedValue }, from_date && to_date ? { from_date, to_date } : {}),
+    Object.assign(
+      { keyword: debouncedValue, limit: 10000000 },
+      from_date && to_date ? { from_date, to_date } : {},
+    ),
 
     { refetchOnMountOrArgChange: true },
   );

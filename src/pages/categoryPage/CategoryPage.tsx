@@ -21,7 +21,10 @@ export const CategoryPage: FC = () => {
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const { data, isLoading, refetch } = useGetCategoryListQuery(
-    Object.assign({ keyword: debouncedValue }, from_date && to_date ? { from_date, to_date } : {}),
+    Object.assign(
+      { keyword: debouncedValue, limit: 10000000 },
+      from_date && to_date ? { from_date, to_date } : {},
+    ),
 
     { refetchOnMountOrArgChange: true },
   );
