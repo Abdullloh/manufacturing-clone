@@ -51,9 +51,14 @@ const sidebarLink = [
   },
 ];
 
-export const Sidebar: FC = () => {
+export const Sidebar: FC<{ show: boolean }> = ({ show }) => {
   return (
-    <Flex vertical justify="space-between" flex={1} style={{ background: 'rgb(15 23 42)' }}>
+    <Flex
+      className={`md:flex ${
+        show ? 'flex' : 'hidden'
+      } justify-between flex-1 bg-[#0f172a] transition-all ease-in-out delay-150`}
+      vertical
+    >
       <Flex vertical>
         <Logo />
         {sidebarLink.map((item, idx) => (
