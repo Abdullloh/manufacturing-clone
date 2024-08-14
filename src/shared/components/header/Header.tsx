@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 export const Header: FC<{ handleShow: () => void }> = ({ handleShow }) => {
   return (
-    <Flex className="p-7">
+    <Flex className="p-5">
       <UnorderedListOutlined onClick={handleShow} />
     </Flex>
   );

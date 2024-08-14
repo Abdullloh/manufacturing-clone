@@ -52,8 +52,6 @@ const sidebarLink = [
 ];
 
 export const Sidebar: FC<{ show?: boolean }> = ({ show }) => {
-  console.log(show);
-
   return (
     <Flex
       className={`${
