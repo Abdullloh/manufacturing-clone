@@ -56,6 +56,15 @@ export const productService = createApi({
         body,
       }),
     }),
+    getProductsExcel: builder.mutation<Blob, IQuery>({
+      query: (body) => ({
+        url: '/products/excel',
+        method: 'POST',
+        body,
+        responseHandler: async (response) =>
+          window.location.assign(window.URL.createObjectURL(await response.blob())),
+      }),
+    }),
   }),
 });
 
@@ -64,6 +73,7 @@ export const {
   useDeleteProductMutation,
   useUpdateProductMutation,
   useGetExitedProductsQuery,
+  useGetProductsExcelMutation,
   useGetProductItemMutation,
   useGetProductsQuery,
   useDecrementProductMutation,

@@ -1,17 +1,18 @@
 import { Button, Flex, Typography } from 'antd';
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { PRODUCT_COLUMNS } from '../../features/products/columns';
 import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
 import { IProduct } from '../../features/products/models';
 import {
   useCreateProductMutation,
   useDeleteProductMutation,
+  useGetProductsExcelMutation,
   useGetProductsQuery,
   useUpdateProductMutation,
 } from '../../features/products/services';
 import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
-import { useFilter } from '../../shared/hooks';
+import { useFiles, useFilter } from '../../shared/hooks';
 import { useModal } from '../../shared/hooks/useModal';
 
 const { Title } = Typography;
@@ -22,14 +23,23 @@ export const IncomingProductsPage: FC = () => {
   const [updateProduct] = useUpdateProductMutation();
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
   const [deletProducs] = useDeleteProductMutation();
-  const { data, isLoading, refetch } = useGetProductsQuery(
-    Object.assign(
-      { keyword: debouncedValue, limit: 10000000, is_deleted: false },
-      from_date && to_date ? { from_date, to_date } : {},
-    ),
+  const queryArgs = useMemo(
+    () =>
+      Object.assign(
+        {
+          keyword: debouncedValue,
+          limit: 1000000,
+        },
 
-    { refetchOnMountOrArgChange: true },
+        from_date && to_date ? { from_date, to_date } : {},
+      ),
+    [debouncedValue, from_date, to_date],
   );
+  const { data, isLoading, refetch } = useGetProductsQuery(queryArgs, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  const { handleDownloadExcel } = useFiles(useGetProductsExcelMutation, queryArgs);
   const [qrCodeOpen, setQrCodeOpen] = useState<boolean>(false);
 
   const [id, setId] = useState<string>('');
@@ -76,9 +86,14 @@ export const IncomingProductsPage: FC = () => {
     <Flex vertical style={{ width: '100%' }}>
       <Flex justify="space-between">
         <Title level={2}>MAXSULOTLAR RO'YXATI </Title>
-        <Button type="primary" onClick={handleOpenModal}>
-          Qo'shish
-        </Button>
+        <Flex gap={4}>
+          <Button type="primary" onClick={handleOpenModal}>
+            Qo'shish
+          </Button>
+          <Button type="primary" onClick={handleDownloadExcel}>
+            Excel yuklash
+          </Button>
+        </Flex>
       </Flex>
 
       <Filter handleRangeChange={handleRangeChange} handleInputChange={handleChangeInput} />

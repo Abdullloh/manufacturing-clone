@@ -1,14 +1,15 @@
-import { Flex, Table, Typography } from 'antd';
-import { FC, useState } from 'react';
+import { Button, Flex, Table, Typography } from 'antd';
+import { FC, useMemo, useState } from 'react';
 import { EXITED_PRODUCT_COLUMNS } from '../../features/products/columns/exited-product.columns';
 import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
 import { IProduct } from '../../features/products/models';
 import {
   useCreateProductMutation,
   useGetExitedProductsQuery,
+  useGetProductsExcelMutation,
 } from '../../features/products/services';
 import { Filter } from '../../shared/components/filter';
-import { useFilter, useModal } from '../../shared/hooks';
+import { useFiles, useFilter, useModal } from '../../shared/hooks';
 
 const { Title } = Typography;
 
@@ -16,14 +17,22 @@ export const ExitedProductsPage: FC = () => {
   const { isModalOpen, handleCloseModal } = useModal();
   const [addProduct] = useCreateProductMutation();
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
-  const { data, isLoading } = useGetExitedProductsQuery(
-    Object.assign(
-      { keyword: debouncedValue, is_deleted: true, limit: 10000000 },
-      from_date && to_date ? { from_date, to_date } : {},
-    ),
+  const queryArgs = useMemo(
+    () =>
+      Object.assign(
+        {
+          keyword: debouncedValue,
+          limit: 1000000,
+        },
 
-    { refetchOnMountOrArgChange: true },
+        from_date && to_date ? { from_date, to_date } : {},
+      ),
+    [debouncedValue, from_date, to_date],
   );
+  const { data, isLoading } = useGetExitedProductsQuery(queryArgs, {
+    refetchOnMountOrArgChange: true,
+  });
+  const { handleDownloadExcel } = useFiles(useGetProductsExcelMutation, queryArgs);
   const [qrCodeOpen, setQrCodeOpen] = useState<boolean>(false);
 
   const [id, setId] = useState<string>('');
@@ -45,6 +54,9 @@ export const ExitedProductsPage: FC = () => {
     <Flex vertical style={{ width: '100%' }}>
       <Flex justify="space-between">
         <Title level={2}>MAXSULOTLAR RO'YXATI </Title>
+        <Button type="primary" onClick={handleDownloadExcel}>
+          Excel yuklash
+        </Button>
       </Flex>
       <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />
       <Table loading={isLoading} dataSource={data?.data} columns={EXITED_PRODUCT_COLUMNS} />

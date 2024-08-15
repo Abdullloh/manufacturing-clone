@@ -42,6 +42,15 @@ export const dimensionsApi = createApi({
         body,
       }),
     }),
+    getValumeTypeExcel: builder.mutation<Blob, IQuery>({
+      query: (body) => ({
+        url: '/valume-type/excel',
+        method: 'POST',
+        body,
+        responseHandler: async (response) =>
+          window.location.assign(window.URL.createObjectURL(await response.blob())),
+      }),
+    }),
   }),
 });
 
@@ -49,6 +58,7 @@ export const {
   useCreateDimensionMutation,
   useGetValumeTypeListQuery,
   useGetValumeTypeItemMutation,
+  useGetValumeTypeExcelMutation,
   useDeleteDimensionMutation,
   useUpdateDimensionMutation,
 } = dimensionsApi;

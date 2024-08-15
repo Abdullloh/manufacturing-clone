@@ -1,5 +1,5 @@
 import { Button, Flex, Typography } from 'antd';
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SUB_CATEGORY_COLUMNS } from '../../features/subcategory/columns';
 import { SubCategoryAddModal } from '../../features/subcategory/components/modals';
@@ -7,12 +7,13 @@ import { ISubcategory } from '../../features/subcategory/models';
 import {
   useCreateSubCategoryMutation,
   useDeleteSubCategoryMutation,
+  useGetSubCategoryExcelMutation,
   useGetSubCategoryListQuery,
   useUpdateSubCategoryMutation,
 } from '../../features/subcategory/services';
 import { Filter } from '../../shared/components/filter';
 import { ReusableTable } from '../../shared/components/table';
-import { useFilter } from '../../shared/hooks';
+import { useFiles, useFilter } from '../../shared/hooks';
 import { useModal } from '../../shared/hooks/useModal';
 const { Title } = Typography;
 
@@ -21,13 +22,23 @@ export const SubCategoryPage: FC = () => {
   const [updateSubCategory] = useUpdateSubCategoryMutation();
   const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
   const { debouncedValue, from_date, to_date, handleRangeChange, handleChangeInput } = useFilter();
-  const { data, refetch, isLoading } = useGetSubCategoryListQuery(
-    Object.assign(
-      { keyword: debouncedValue, limit: 10000000 },
-      from_date && to_date ? { from_date, to_date } : {},
-    ),
-    { refetchOnMountOrArgChange: true },
+  const queryArgs = useMemo(
+    () =>
+      Object.assign(
+        {
+          keyword: debouncedValue,
+          limit: 1000000,
+        },
+
+        from_date && to_date ? { from_date, to_date } : {},
+      ),
+    [debouncedValue, from_date, to_date],
   );
+
+  const { data, refetch, isLoading } = useGetSubCategoryListQuery(queryArgs, {
+    refetchOnMountOrArgChange: true,
+  });
+  const { handleDownloadExcel } = useFiles(useGetSubCategoryExcelMutation, queryArgs);
   const [id, setId] = useState<string>('');
   const [deleteSubCategory] = useDeleteSubCategoryMutation();
 
@@ -57,9 +68,14 @@ export const SubCategoryPage: FC = () => {
     <Flex vertical style={{ width: '100%' }}>
       <Flex justify="space-between">
         <Title level={2}>SUBKATEGORIYALAR RO'YXATI </Title>
-        <Button type="primary" onClick={handleOpenModal}>
-          Qo'shish
-        </Button>
+        <Flex>
+          <Button type="primary" onClick={handleOpenModal}>
+            Qo'shish
+          </Button>
+          <Button type="primary" onClick={handleDownloadExcel}>
+            Excel yuklash
+          </Button>
+        </Flex>
       </Flex>
 
       <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />

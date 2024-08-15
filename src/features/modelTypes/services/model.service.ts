@@ -42,12 +42,22 @@ export const modelApi = createApi({
         body,
       }),
     }),
+    getModelTypeExcel: builder.mutation<Blob, IQuery>({
+      query: (body) => ({
+        url: '/model-type/excel',
+        method: 'POST',
+        body,
+        responseHandler: async (response) =>
+          window.location.assign(window.URL.createObjectURL(await response.blob())),
+      }),
+    }),
   }),
 });
 
 export const {
   useCreateModelTypeMutation,
   useGetModelTypeListQuery,
+  useGetModelTypeExcelMutation,
   useDeleteModelTypeMutation,
   useGetModelTypeItemMutation,
   useUpdateModelTypeMutation,
