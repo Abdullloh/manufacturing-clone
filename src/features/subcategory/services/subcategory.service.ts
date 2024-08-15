@@ -35,7 +35,7 @@ export const subCategoryApi = createApi({
       query: (body) => ({
         url: '/sub-category/list',
         method: 'POST',
-        body,
+        body: { ...body, limit: 1000000 },
       }),
     }),
     getSubCategoryItem: builder.mutation<ISubcategoryItem, { id: string }>({

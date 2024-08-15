@@ -43,6 +43,7 @@ export const IncomingProductsPage: FC = () => {
       addProduct(values).then(({ data }) => {
         handleCloseModal();
         setId(data.id);
+        refetch();
         setQrCodeOpen(true);
       });
     } else {
@@ -51,6 +52,7 @@ export const IncomingProductsPage: FC = () => {
         if (data) {
           setId(data?.id);
         }
+        refetch();
         setQrCodeOpen(true);
       });
     }

@@ -32,7 +32,7 @@ export const dimensionsApi = createApi({
       query: (body) => ({
         url: '/valume-type/list',
         method: 'POST',
-        body,
+        body: { ...body, limit: 1000000 },
       }),
     }),
     getValumeTypeItem: builder.mutation<IDimensionItem, { id: string }>({

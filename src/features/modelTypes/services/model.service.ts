@@ -32,7 +32,7 @@ export const modelApi = createApi({
       query: (body) => ({
         url: '/model-type/list',
         method: 'POST',
-        body,
+        body: { ...body, limit: 1000000 },
       }),
     }),
     getModelTypeItem: builder.mutation<IModelTypeItem, { id: string }>({

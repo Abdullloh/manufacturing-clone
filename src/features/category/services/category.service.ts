@@ -18,7 +18,7 @@ export const categoryApi = createApi({
       query: (body) => ({
         url: '/category/list',
         method: 'POST',
-        body,
+        body: { ...body, limit: 1000000 },
       }),
     }),
     getCategoryItem: builder.mutation<ICategoryResponseItem, { id: string }>({
