@@ -24,7 +24,7 @@ export const IncomingProductsPage: FC = () => {
   const [deletProducs] = useDeleteProductMutation();
   const { data, isLoading, refetch } = useGetProductsQuery(
     Object.assign(
-      { keyword: debouncedValue, limit: 10000000 },
+      { keyword: debouncedValue, limit: 10000000, is_deleted: false },
       from_date && to_date ? { from_date, to_date } : {},
     ),
 
