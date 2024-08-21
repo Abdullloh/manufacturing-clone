@@ -29,6 +29,7 @@ export const IncomingProductsPage: FC = () => {
         {
           keyword: debouncedValue,
           limit: 1000000,
+          is_deleted: false,
         },
 
         from_date && to_date ? { from_date, to_date } : {},
