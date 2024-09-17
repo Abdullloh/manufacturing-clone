@@ -1,7 +1,7 @@
 import { Button, Flex, Typography } from 'antd';
 import { FC, useMemo, useState } from 'react';
 import { PRODUCT_COLUMNS } from '../../features/products/columns';
-import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
+import { AddProductModal } from '../../features/products/components/modals';
 import { IProduct } from '../../features/products/models';
 import {
   useCreateProductMutation,
@@ -109,9 +109,6 @@ export const IncomingProductsPage: FC = () => {
         showScannerIcon
       />
 
-      {qrCodeOpen && (
-        <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />
-      )}
       {isModalOpen && (
         <AddProductModal
           id={id}

@@ -1,7 +1,7 @@
 import { Button, Flex, Table, Typography } from 'antd';
 import { FC, useMemo, useState } from 'react';
 import { PRODUCT_COLUMNS } from '../../features/products/columns';
-import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
+import { AddProductModal } from '../../features/products/components/modals';
 import { IProduct } from '../../features/products/models';
 import {
   useCreateProductMutation,
@@ -62,7 +62,6 @@ export const ProductsPage: FC = () => {
 
       <Table loading={isLoading} dataSource={data?.data} columns={PRODUCT_COLUMNS} />
 
-      <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />
       <AddProductModal
         open={isModalOpen}
         title="Mahsulot qo'shish"

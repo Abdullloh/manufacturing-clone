@@ -1,7 +1,7 @@
 import { Button, Flex, Table, Typography } from 'antd';
 import { FC, useMemo, useState } from 'react';
 import { EXITED_PRODUCT_COLUMNS } from '../../features/products/columns/exited-product.columns';
-import { AddProductModal, ShowQrCodeModal } from '../../features/products/components/modals';
+import { AddProductModal } from '../../features/products/components/modals';
 import { IProduct } from '../../features/products/models';
 import {
   useCreateProductMutation,
@@ -61,7 +61,6 @@ export const ExitedProductsPage: FC = () => {
       <Filter handleInputChange={handleChangeInput} handleRangeChange={handleRangeChange} />
       <Table loading={isLoading} dataSource={data?.data} columns={EXITED_PRODUCT_COLUMNS} />
 
-      <ShowQrCodeModal onPrintQrCode={handlePrintQrCode} open={qrCodeOpen} value={id} />
       <AddProductModal
         open={isModalOpen}
         title="Mahsulot qo'shish"

@@ -2,8 +2,6 @@ export * from './filter';
 export * from './form';
 export * from './input';
 export * from './logo';
-export * from './qRCodeGenerator';
-export * from './qRCodeScanner';
 export * from './selects';
 export * from './sidebar';
 export * from './table';
